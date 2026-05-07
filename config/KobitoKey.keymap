@@ -125,15 +125,17 @@
         };
 
         // Layer 3: FUNCTION
-        // 左側: F1-F12
-        // 右側: BT/MC/タブ操作/戻る進む（AeroSpace前提でmacOSデスクトップ系・タイル系は削除）
+        // 上段: AeroSpaceワークスペース切替 (Alt+1〜5) + BT/MC/BT_CLR
+        // 中段左: F1-F5
+        // 下段左: F6-F10
+        // 右側: タブ操作 (J/K) / 戻る進む (M/,)
         func_layer {
             label = "FUNCTION";
             bindings = <
-&kp F1   &kp F2   &kp F3   &kp F4   &kp F5         &bt_mac          &bt_win        &kp LC(UP)  &trans     &trans
-&kp F6   &kp F7   &kp F8   &kp F9   &kp F10        &trans           &kp LC(LS(TAB)) &kp LC(TAB) &trans     &trans
-&kp F11  &kp F12  &trans   &trans   &bt BT_CLR_ALL &bt BT_SEL 2     &kp LG(LBKT)   &kp LG(RBKT) &bt BT_SEL 3 &bt BT_SEL 4
-&trans   &trans   &trans   &trans   &trans         &trans           &trans         &trans      &trans     &trans
+&kp LA(N1)  &kp LA(N2)  &kp LA(N3)  &kp LA(N4)  &kp LA(N5)      &bt_mac    &bt_win          &kp LC(UP)   &bt BT_CLR  &bt BT_CLR_ALL
+&kp F1      &kp F2      &kp F3      &kp F4      &kp F5          &trans     &kp LC(LS(TAB))  &kp LC(TAB)  &trans      &trans
+&kp F6      &kp F7      &kp F8      &kp F9      &kp F10         &trans     &kp LG(LBKT)     &kp LG(RBKT) &trans      &trans
+&trans      &trans      &trans      &trans      &trans          &trans     &trans           &trans       &trans      &trans
             >;
         };
     };
