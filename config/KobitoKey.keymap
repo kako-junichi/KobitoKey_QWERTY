@@ -93,12 +93,13 @@
         compatible = "zmk,keymap";
 
         // Layer 0: Mac (Cmd tap=Ctrl+Space で macOS入力ソーストグル)
+        // ENTER hold=LALT (AeroSpaceでAlt+◯◯多用するため)
         mac_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T               &kp Y     &kp U           &kp I      &kp O    &kp P
 &kp A     &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &kp L    &kp SEMI
 &kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &kp APOS
-&kp LALT  &kp TAB   &kp LCTRL  &lt NUM SPACE  &mt LCMD LC(SPACE)  &kp BSPC  &lt FUNC ENTER  &kp RSHFT  &none    &ss_ht LG(LS(N5)) LG(LS(N4))
+&kp LALT  &mo FUNC  &kp LCTRL  &lt NUM SPACE  &mt LCMD LC(SPACE)  &kp BSPC  &mt LALT ENTER  &kp RSHFT  &none    &ss_ht LG(LS(N5)) LG(LS(N4))
             >;
         };
 
@@ -108,7 +109,7 @@
 &kp Q     &kp W     &kp E      &kp R          &kp T                           &kp Y     &kp U           &kp I      &kp O    &kp P
 &kp A     &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &kp L    &kp SEMI
 &kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &kp APOS
-&kp LGUI  &kp TAB   &kp LCTRL  &lt NUM SPACE  &ctrl_muhen LCTRL INT_MUHENKAN  &kp BSPC  &lt FUNC ENTER  &kp RSHFT  &none    &kp LG(LS(S))
+&kp LGUI  &mo FUNC  &kp LCTRL  &lt NUM SPACE  &ctrl_muhen LCTRL INT_MUHENKAN  &kp BSPC  &mt LALT ENTER  &kp RSHFT  &none    &kp LG(LS(S))
             >;
         };
 
@@ -123,18 +124,16 @@
             >;
         };
 
-        // Layer 3: FUNCTION (旧ジェスチャー機能をボタン化)
-        // 左 home row: タイル管理 (Ctrl+Alt+矢印)
-        // 左 bottom row: アプリ切替 (Cmd+Tab系)
-        // 右 home row: デスクトップ移動 (Ctrl+矢印 / Mission Control)
-        // 右 bottom row: タブ操作 (Ctrl+Tab / Cmd+T / Cmd+W)
+        // Layer 3: FUNCTION
+        // 左側: F1-F12
+        // 右側: BT/MC/タブ操作/戻る進む（AeroSpace前提でmacOSデスクトップ系・タイル系は削除）
         func_layer {
             label = "FUNCTION";
             bindings = <
-&bt_mac           &bt_win              &bt BT_SEL 2     &bt BT_SEL 3      &bt BT_SEL 4    &kp F1            &kp F2          &kp F3   &kp F4   &kp F5
-&kp LC(LA(LEFT))  &kp LC(LA(DOWN))     &kp LC(LA(UP))   &kp LC(LA(RIGHT)) &bt BT_CLR      &kp LC(LEFT)      &trans          &kp LC(UP) &kp LC(RIGHT) &trans
-&trans            &kp LG(LS(TAB))      &kp LG(TAB)      &kp LG(GRAVE)     &bt BT_CLR_ALL  &kp LC(LS(TAB))   &kp LC(TAB)     &kp LG(T) &kp LG(W) &trans
-&trans            &trans               &trans           &trans            &trans          &trans            &trans          &trans     &trans   &trans
+&kp F1   &kp F2   &kp F3   &kp F4   &kp F5         &bt_mac          &bt_win        &kp LC(UP)  &trans     &trans
+&kp F6   &kp F7   &kp F8   &kp F9   &kp F10        &trans           &kp LC(LS(TAB)) &kp LC(TAB) &trans     &trans
+&kp F11  &kp F12  &trans   &trans   &bt BT_CLR_ALL &bt BT_SEL 2     &kp LG(LBKT)   &kp LG(RBKT) &bt BT_SEL 3 &bt BT_SEL 4
+&trans   &trans   &trans   &trans   &trans         &trans           &trans         &trans      &trans     &trans
             >;
         };
     };
