@@ -19,7 +19,7 @@
     zip_gesture_desktop: zip_gesture_desktop {
         compatible = "zmk,input-processor-mouse-gesture";
         #input-processor-cells = <0>;
-        stroke-size = <40>;
+        stroke-size = <25>;
         enable-eager-mode;
 
         desktop_right {
