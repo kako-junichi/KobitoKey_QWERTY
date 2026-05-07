@@ -3,167 +3,14 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
-#include <mouse-gesture.dtsi>
 
 #define MAC      0
 #define WIN      1
 #define NUM      2
 #define FUNC     3
-#define GEST_DESK 4
-#define GEST_TAB  5
-#define GEST_APP  6
-#define GEST_TILE 7
-
-/ {
-    // ジェスチャー定義: 仮想デスクトップ (F hold)
-    zip_gesture_desktop: zip_gesture_desktop {
-        compatible = "zmk,input-processor-mouse-gesture";
-        #input-processor-cells = <0>;
-        stroke-size = <25>;
-        enable-eager-mode;
-
-        desktop_right {
-            pattern = <GESTURE_RIGHT>;
-            bindings = <&kp LC(RIGHT)>;
-        };
-        desktop_left {
-            pattern = <GESTURE_LEFT>;
-            bindings = <&kp LC(LEFT)>;
-        };
-        mission_control {
-            pattern = <GESTURE_UP>;
-            bindings = <&kp LC(UP)>;
-        };
-    };
-
-    // ジェスチャー定義: タブ操作 (D hold)
-    zip_gesture_tab: zip_gesture_tab {
-        compatible = "zmk,input-processor-mouse-gesture";
-        #input-processor-cells = <0>;
-        stroke-size = <25>;
-        enable-eager-mode;
-
-        tab_right {
-            pattern = <GESTURE_RIGHT>;
-            bindings = <&kp LC(TAB)>;
-        };
-        tab_left {
-            pattern = <GESTURE_LEFT>;
-            bindings = <&kp LC(LS(TAB))>;
-        };
-        new_tab {
-            pattern = <GESTURE_UP>;
-            bindings = <&kp LG(T)>;
-        };
-        close_tab {
-            pattern = <GESTURE_DOWN>;
-            bindings = <&kp LG(W)>;
-        };
-    };
-
-    // ジェスチャー定義: アプリ切替 (S hold)
-    // Cmdは layer enter/exit で持続押下するので、ここでは Tab のみ送信
-    zip_gesture_app: zip_gesture_app {
-        compatible = "zmk,input-processor-mouse-gesture";
-        #input-processor-cells = <0>;
-        stroke-size = <40>;
-        enable-eager-mode;
-
-        app_next {
-            pattern = <GESTURE_RIGHT>;
-            bindings = <&kp TAB>;
-        };
-        app_prev {
-            pattern = <GESTURE_LEFT>;
-            bindings = <&kp LS(TAB)>;
-        };
-        same_app_window {
-            pattern = <GESTURE_DOWN>;
-            bindings = <&kp GRAVE>;
-        };
-    };
-
-    // ジェスチャー定義: タイル管理 (A hold)
-    zip_gesture_tile: zip_gesture_tile {
-        compatible = "zmk,input-processor-mouse-gesture";
-        #input-processor-cells = <0>;
-        stroke-size = <40>;
-        enable-eager-mode;
-
-        tile_left {
-            pattern = <GESTURE_LEFT>;
-            bindings = <&kp LC(LA(LEFT))>;
-        };
-        tile_right {
-            pattern = <GESTURE_RIGHT>;
-            bindings = <&kp LC(LA(RIGHT))>;
-        };
-        tile_maximize {
-            pattern = <GESTURE_UP>;
-            bindings = <&kp LC(LA(UP))>;
-        };
-        tile_center {
-            pattern = <GESTURE_DOWN>;
-            bindings = <&kp LC(LA(DOWN))>;
-        };
-    };
-
-    // レイヤー進入時にジェスチャー処理オン/オフ
-    layer_listeners {
-        compatible = "zmk,layer-listeners";
-
-        gesture_desktop {
-            layers = <GEST_DESK>;
-            bindings = <&mouse_gesture_on &mouse_gesture_off>;
-        };
-        gesture_tab {
-            layers = <GEST_TAB>;
-            bindings = <&mouse_gesture_on &mouse_gesture_off>;
-        };
-        gesture_app {
-            layers = <GEST_APP>;
-            bindings = <&app_switch_on &app_switch_off>;
-        };
-        gesture_tile {
-            layers = <GEST_TILE>;
-            bindings = <&mouse_gesture_on &mouse_gesture_off>;
-        };
-    };
-};
-
-// 左トラックボール: ジェスチャーレイヤー時はジェスチャー検出に切替
-// sensor_rotation_left で向き補正してからジェスチャー判定、最後にzip_xy_scaler 0でカーソル移動を抑止
-&tb_left_listener {
-    gestures_desktop {
-        layers = <GEST_DESK>;
-        input-processors = <&sensor_rotation_left &zip_gesture_desktop &zip_xy_scaler 0 1>;
-    };
-    gestures_tab {
-        layers = <GEST_TAB>;
-        input-processors = <&sensor_rotation_left &zip_gesture_tab &zip_xy_scaler 0 1>;
-    };
-    gestures_app {
-        layers = <GEST_APP>;
-        input-processors = <&sensor_rotation_left &zip_gesture_app &zip_xy_scaler 0 1>;
-    };
-    gestures_tile {
-        layers = <GEST_TILE>;
-        input-processors = <&sensor_rotation_left &zip_gesture_tile &zip_xy_scaler 0 1>;
-    };
-};
 
 / {
     behaviors {
-        // hold: ジェスチャーレイヤー / tap: 文字
-        gest_kp: gest_kp {
-            compatible = "zmk,behavior-hold-tap";
-            label = "GEST_KP";
-            bindings = <&mo>, <&kp>;
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            flavor = "balanced";
-        };
-
         // tap: Cmd+Shift+4 (範囲スクショ) / hold: Cmd+Shift+5 (スクショメニュー)
         ss_ht: ss_ht {
             compatible = "zmk,behavior-hold-tap";
@@ -200,22 +47,6 @@
             #binding-cells = <0>;
             bindings = <&bt BT_SEL 1 &to WIN>;
             label = "BT_WIN";
-        };
-
-        // GEST_APP進入時: Cmd押下したまま + ジェスチャー検出ON
-        app_switch_on: app_switch_on {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&macro_press &kp LCMD>, <&mouse_gesture_on>;
-            label = "APP_SWITCH_ON";
-        };
-
-        // GEST_APP退出時: ジェスチャー検出OFF + Cmd解放（選択中のアプリに切替）
-        app_switch_off: app_switch_off {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&mouse_gesture_off>, <&macro_release &kp LCMD>;
-            label = "APP_SWITCH_OFF";
         };
     };
 
@@ -264,76 +95,46 @@
         // Layer 0: Mac (Cmd tap=Ctrl+Space で macOS入力ソーストグル)
         mac_layer {
             bindings = <
-&kp Q                       &kp W                  &kp E                  &kp R                          &kp T               &kp Y     &kp U                       &kp I      &kp O     &kp P
-&gest_kp GEST_TILE A        &gest_kp GEST_APP S    &gest_kp GEST_TAB D    &gest_kp GEST_DESK F           &kp G               &kp H     &kp J                       &kp K      &kp L     &kp SEMI
-&kp Z                       &kp X                  &kp C                  &kp V                          &kp B               &kp N     &kp M                       &kp COMMA  &kp DOT   &kp APOS
-&kp LALT                    &kp TAB                &kp LCTRL              &lt NUM SPACE                  &mt LCMD LC(SPACE)  &kp BSPC  &lt FUNC ENTER              &kp RSHFT  &none     &ss_ht LG(LS(N5)) LG(LS(N4))
+&kp Q     &kp W     &kp E      &kp R          &kp T               &kp Y     &kp U           &kp I      &kp O    &kp P
+&kp A     &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &kp L    &kp SEMI
+&kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &kp APOS
+&kp LALT  &kp TAB   &kp LCTRL  &lt NUM SPACE  &mt LCMD LC(SPACE)  &kp BSPC  &lt FUNC ENTER  &kp RSHFT  &none    &ss_ht LG(LS(N5)) LG(LS(N4))
             >;
         };
 
-        // Layer 1: Windows (ctrl_muhenでIME英数切替、Win+Shift+Sでスクショ)
+        // Layer 1: Windows
         win_layer {
             bindings = <
-&kp Q                       &kp W                  &kp E                  &kp R                          &kp T     &kp Y     &kp U                       &kp I      &kp O     &kp P
-&gest_kp GEST_TILE A        &gest_kp GEST_APP S    &gest_kp GEST_TAB D    &gest_kp GEST_DESK F           &kp G     &kp H     &kp J                       &kp K      &kp L     &kp SEMI
-&kp Z                       &kp X                  &kp C                  &kp V                          &kp B     &kp N     &kp M                       &kp COMMA  &kp DOT   &kp APOS
-&kp LGUI                    &kp TAB                &kp LCTRL              &lt NUM SPACE                  &ctrl_muhen LCTRL INT_MUHENKAN  &kp BSPC  &lt FUNC ENTER  &kp RSHFT  &none     &kp LG(LS(S))
+&kp Q     &kp W     &kp E      &kp R          &kp T                           &kp Y     &kp U           &kp I      &kp O    &kp P
+&kp A     &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &kp L    &kp SEMI
+&kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &kp APOS
+&kp LGUI  &kp TAB   &kp LCTRL  &lt NUM SPACE  &ctrl_muhen LCTRL INT_MUHENKAN  &kp BSPC  &lt FUNC ENTER  &kp RSHFT  &none    &kp LG(LS(S))
             >;
         };
 
+        // Layer 2: NUM (記号もここに集約)
         num_layer {
             label = "NUMBER";
             bindings = <
-&kp MINUS  &kp N1  &kp N2  &kp N3  &kp PLUS   &kp CARET  &kp AMPS   &kp TILDE  &kp LPAR   &kp RPAR
-&kp SLASH  &kp N4  &kp N5  &kp N6  &kp N0     &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT
-&kp ASTRK  &kp N7  &kp N8  &kp N9  &kp DOT    &kp LBKT   &kp RBKT   &kp LBRC   &kp RBRC   &kp BSLH
-&trans     &trans  &trans  &trans  &trans     &trans     &trans     &trans     &trans     &trans
+&kp MINUS  &kp N1  &kp N2  &kp N3  &kp PLUS   &kp CARET  &kp AMPS  &kp TILDE  &kp LPAR  &kp RPAR
+&kp SLASH  &kp N4  &kp N5  &kp N6  &kp N0     &kp EXCL   &kp AT    &kp HASH   &kp DLLR  &kp PRCNT
+&kp ASTRK  &kp N7  &kp N8  &kp N9  &kp DOT    &kp LBKT   &kp RBKT  &kp LBRC   &kp RBRC  &kp BSLH
+&trans     &trans  &trans  &trans  &trans     &trans     &trans    &trans     &trans    &trans
             >;
         };
 
+        // Layer 3: FUNCTION (旧ジェスチャー機能をボタン化)
+        // 左 home row: タイル管理 (Ctrl+Alt+矢印)
+        // 左 bottom row: アプリ切替 (Cmd+Tab系)
+        // 右 home row: デスクトップ移動 (Ctrl+矢印 / Mission Control)
+        // 右 bottom row: タブ操作 (Ctrl+Tab / Cmd+T / Cmd+W)
         func_layer {
             label = "FUNCTION";
             bindings = <
-&bt_mac       &bt_win       &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp F1   &kp F2   &kp F3  &kp F4  &kp F5
-&trans        &trans        &trans        &trans        &bt BT_CLR      &kp F6   &kp F7   &kp F8  &kp F9  &kp F10
-&trans        &trans        &trans        &trans        &bt BT_CLR_ALL  &kp F11  &kp F12  &trans  &trans  &trans
-&trans        &trans        &trans        &trans        &trans          &trans   &trans   &trans  &trans  &trans
-            >;
-        };
-
-        gesture_desktop_layer {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-            >;
-        };
-
-        gesture_tab_layer {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-            >;
-        };
-
-        gesture_app_layer {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-            >;
-        };
-
-        gesture_tile_layer {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&bt_mac           &bt_win              &bt BT_SEL 2     &bt BT_SEL 3      &bt BT_SEL 4    &kp F1            &kp F2          &kp F3   &kp F4   &kp F5
+&kp LC(LA(LEFT))  &kp LC(LA(DOWN))     &kp LC(LA(UP))   &kp LC(LA(RIGHT)) &bt BT_CLR      &kp LC(LEFT)      &trans          &kp LC(UP) &kp LC(RIGHT) &trans
+&trans            &kp LG(LS(TAB))      &kp LG(TAB)      &kp LG(GRAVE)     &bt BT_CLR_ALL  &kp LC(LS(TAB))   &kp LC(TAB)     &kp LG(T) &kp LG(W) &trans
+&trans            &trans               &trans           &trans            &trans          &trans            &trans          &trans     &trans   &trans
             >;
         };
     };
