@@ -243,13 +243,13 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // Layer 0: Mac (Karabinerと併用、Cmd単押しでIMEトグル)
+        // Layer 0: Mac (Cmd tap=Ctrl+Space で macOS入力ソーストグル)
         mac_layer {
             bindings = <
-&kp Q                       &kp W                  &kp E                  &kp R                          &kp T     &kp Y     &kp U                       &kp I      &kp O     &kp P
-&gest_kp GEST_TILE A        &gest_kp GEST_APP S    &gest_kp GEST_TAB D    &gest_kp GEST_DESK F           &kp G     &kp H     &kp J                       &kp K      &kp L     &kp SEMI
-&kp Z                       &kp X                  &kp C                  &kp V                          &kp B     &kp N     &kp M                       &kp COMMA  &kp DOT   &kp APOS
-&kp LALT                    &kp TAB                &kp LCTRL              &lt NUM SPACE                  &kp LCMD  &kp BSPC  &lt FUNC ENTER              &kp RSHFT  &none     &ss_ht LG(LS(N5)) LG(LS(N4))
+&kp Q                       &kp W                  &kp E                  &kp R                          &kp T               &kp Y     &kp U                       &kp I      &kp O     &kp P
+&gest_kp GEST_TILE A        &gest_kp GEST_APP S    &gest_kp GEST_TAB D    &gest_kp GEST_DESK F           &kp G               &kp H     &kp J                       &kp K      &kp L     &kp SEMI
+&kp Z                       &kp X                  &kp C                  &kp V                          &kp B               &kp N     &kp M                       &kp COMMA  &kp DOT   &kp APOS
+&kp LALT                    &kp TAB                &kp LCTRL              &lt NUM SPACE                  &mt LCMD LC(SPACE)  &kp BSPC  &lt FUNC ENTER              &kp RSHFT  &none     &ss_ht LG(LS(N5)) LG(LS(N4))
             >;
         };
 
