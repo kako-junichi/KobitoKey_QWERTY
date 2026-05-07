@@ -62,6 +62,7 @@
     };
 
     // ジェスチャー定義: アプリ切替 (S hold)
+    // Cmdは layer enter/exit で持続押下するので、ここでは Tab のみ送信
     zip_gesture_app: zip_gesture_app {
         compatible = "zmk,input-processor-mouse-gesture";
         #input-processor-cells = <0>;
@@ -70,15 +71,15 @@
 
         app_next {
             pattern = <GESTURE_RIGHT>;
-            bindings = <&kp LG(TAB)>;
+            bindings = <&kp TAB>;
         };
         app_prev {
             pattern = <GESTURE_LEFT>;
-            bindings = <&kp LG(LS(TAB))>;
+            bindings = <&kp LS(TAB)>;
         };
         same_app_window {
             pattern = <GESTURE_DOWN>;
-            bindings = <&kp LG(GRAVE)>;
+            bindings = <&kp GRAVE>;
         };
     };
 
@@ -121,7 +122,7 @@
         };
         gesture_app {
             layers = <GEST_APP>;
-            bindings = <&mouse_gesture_on &mouse_gesture_off>;
+            bindings = <&app_switch_on &app_switch_off>;
         };
         gesture_tile {
             layers = <GEST_TILE>;
@@ -199,6 +200,22 @@
             #binding-cells = <0>;
             bindings = <&bt BT_SEL 1 &to WIN>;
             label = "BT_WIN";
+        };
+
+        // GEST_APP進入時: Cmd押下したまま + ジェスチャー検出ON
+        app_switch_on: app_switch_on {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LCMD>, <&mouse_gesture_on>;
+            label = "APP_SWITCH_ON";
+        };
+
+        // GEST_APP退出時: ジェスチャー検出OFF + Cmd解放（選択中のアプリに切替）
+        app_switch_off: app_switch_off {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&mouse_gesture_off>, <&macro_release &kp LCMD>;
+            label = "APP_SWITCH_OFF";
         };
     };
 
