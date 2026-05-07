@@ -266,10 +266,10 @@
         num_layer {
             label = "NUMBER";
             bindings = <
-&kp N0     &kp N1  &kp N2  &kp N3     &trans  &kp MINUS  &trans     &kp UP    &trans     &trans
-&kp EQUAL  &kp N4  &kp N5  &kp N6     &trans  &kp PLUS   &kp LEFT   &kp DOWN  &kp RIGHT  &trans
-&trans     &kp N7  &kp N8  &kp N9     &trans  &kp ASTRK  &kp SLASH  &kp LBKT  &kp RBKT   &trans
-&trans     &trans  &trans  &trans     &trans  &trans     &trans     &trans    &trans     &trans
+&kp MINUS  &kp N1  &kp N2  &kp N3  &kp PLUS   &kp CARET  &kp AMPS   &kp TILDE  &kp LPAR   &kp RPAR
+&kp SLASH  &kp N4  &kp N5  &kp N6  &kp N0     &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT
+&kp ASTRK  &kp N7  &kp N8  &kp N9  &kp DOT    &kp LBKT   &kp RBKT   &kp LBRC   &kp RBRC   &kp BSLH
+&trans     &trans  &trans  &trans  &trans     &trans     &trans     &trans     &trans     &trans
             >;
         };
 
