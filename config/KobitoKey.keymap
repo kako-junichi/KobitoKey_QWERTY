@@ -131,23 +131,23 @@
 };
 
 // 左トラックボール: ジェスチャーレイヤー時はジェスチャー検出に切替
-// zip_xy_scaler 0 1 でカーソル移動・スクロールをゼロ化
+// sensor_rotation_left で向き補正してからジェスチャー判定、最後にzip_xy_scaler 0でカーソル移動を抑止
 &tb_left_listener {
     gestures_desktop {
         layers = <GEST_DESK>;
-        input-processors = <&zip_gesture_desktop &zip_xy_scaler 0 1>;
+        input-processors = <&sensor_rotation_left &zip_gesture_desktop &zip_xy_scaler 0 1>;
     };
     gestures_tab {
         layers = <GEST_TAB>;
-        input-processors = <&zip_gesture_tab &zip_xy_scaler 0 1>;
+        input-processors = <&sensor_rotation_left &zip_gesture_tab &zip_xy_scaler 0 1>;
     };
     gestures_app {
         layers = <GEST_APP>;
-        input-processors = <&zip_gesture_app &zip_xy_scaler 0 1>;
+        input-processors = <&sensor_rotation_left &zip_gesture_app &zip_xy_scaler 0 1>;
     };
     gestures_tile {
         layers = <GEST_TILE>;
-        input-processors = <&zip_gesture_tile &zip_xy_scaler 0 1>;
+        input-processors = <&sensor_rotation_left &zip_gesture_tile &zip_xy_scaler 0 1>;
     };
 };
 
