@@ -88,24 +88,24 @@
             bindings = <&mkp MB2>;
         };
 
-        // 前タブ: H + J (Ctrl+Shift+Tab)
+        // 前タブ: U + I (Ctrl+Shift+Tab)
         combo_tab_prev {
             timeout-ms = <50>;
-            key-positions = <15 16>;
+            key-positions = <6 7>;
             bindings = <&kp LC(LS(TAB))>;
         };
 
-        // 次タブ: L + ; (Ctrl+Tab)
+        // 次タブ: I + O (Ctrl+Tab)
         combo_tab_next {
             timeout-ms = <50>;
-            key-positions = <18 19>;
+            key-positions = <7 8>;
             bindings = <&kp LC(TAB)>;
         };
 
-        // 戻る: N + M (Cmd+[)
+        // 戻る: M + , (Cmd+[)
         combo_back {
             timeout-ms = <50>;
-            key-positions = <25 26>;
+            key-positions = <26 27>;
             bindings = <&kp LG(LBKT)>;
         };
 
