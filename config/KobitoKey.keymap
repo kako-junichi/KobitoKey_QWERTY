@@ -19,7 +19,7 @@
     zip_gesture_desktop: zip_gesture_desktop {
         compatible = "zmk,input-processor-mouse-gesture";
         #input-processor-cells = <0>;
-        stroke-size = <150>;
+        stroke-size = <75>;
         enable-eager-mode;
 
         desktop_right {
@@ -40,7 +40,7 @@
     zip_gesture_tab: zip_gesture_tab {
         compatible = "zmk,input-processor-mouse-gesture";
         #input-processor-cells = <0>;
-        stroke-size = <100>;
+        stroke-size = <50>;
         enable-eager-mode;
 
         tab_right {
@@ -65,7 +65,7 @@
     zip_gesture_app: zip_gesture_app {
         compatible = "zmk,input-processor-mouse-gesture";
         #input-processor-cells = <0>;
-        stroke-size = <150>;
+        stroke-size = <75>;
         enable-eager-mode;
 
         app_next {
@@ -86,7 +86,7 @@
     zip_gesture_tile: zip_gesture_tile {
         compatible = "zmk,input-processor-mouse-gesture";
         #input-processor-cells = <0>;
-        stroke-size = <150>;
+        stroke-size = <75>;
         enable-eager-mode;
 
         tile_left {
