@@ -1,13 +1,130 @@
 # KobitoKey_QWERTY
 
-Layer 0 QWERTY
-<img width="1280" height="690" alt="Image" src="https://github.com/user-attachments/assets/ef0797b7-a63f-4632-912d-9b5d0115769f" />
+KobitoKey のカスタムキーマップ（kako-junichi 用）。
+ZMK ベース、ジェスチャーは廃止し、AeroSpace + AltTab ワークフロー寄せ構成。
 
-Layer 1 NUMBER & ARROW
-<img width="1280" height="690" alt="Image" src="https://github.com/user-attachments/assets/d6347b3c-a238-4278-bacd-e58195774d0e" />
+## レイヤー一覧
 
-Layer 2 Bluetooth & FUNCTION
-<img width="1280" height="690" alt="Image" src="https://github.com/user-attachments/assets/f1f7cc93-fbd8-4a98-84ea-c8c36ad3952d" />
+| Layer | 名前 | 進入方法 |
+|-------|------|----------|
+| 0 | MAC | デフォルト |
+| 1 | WIN | FUNC内の `bt_win` 押下で固定 |
+| 2 | NUM | 左親指 SPACE 長押し |
+| 3 | FUNC | 左小指 位置31 (旧TAB) 長押し |
 
-Layer 3 AUTO MOUSE
-<img width="1280" height="690" alt="Image" src="https://github.com/user-attachments/assets/2efe5275-e460-41bc-ae45-0c0665435268" />
+## デフォルトレイヤー（Mac）
+
+```
+┌─────┬─────┬─────┬─────┬─────┐  ┌─────┬─────┬─────┬─────┬─────┐
+│  Q  │  W  │  E  │  R  │  T  │  │  Y  │  U  │  I  │  O  │  P  │
+├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
+│  A  │  S  │  D  │  F  │  G  │  │  H  │  J  │  K  │  L  │  ;  │
+├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
+│  Z  │  X  │  C  │  V  │  B  │  │  N  │  M  │  ,  │  .  │  '  │
+├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
+│LALT │FUNC │LCTRL│ SPC │ CMD │  │BSPC │ ENT │RSHFT│none │ssht │
+│     │(mo) │     │/NUM │/IME │  │     │/Alt │     │     │     │
+└─────┴─────┴─────┴─────┴─────┘  └─────┴─────┴─────┴─────┴─────┘
+```
+
+### 親指キーの説明
+
+| 位置 | キー | 動作 |
+|------|------|------|
+| 30 | LALT | Alt（小指） |
+| 31 | FUNC | 長押しで FUNC レイヤー（小指） |
+| 32 | LCTRL | Ctrl |
+| 33 | SPACE/NUM | tap=SPACE / hold=NUM レイヤー |
+| 34 | LCMD/IME | tap=Ctrl+Space (macOS入力ソーストグル) / hold=Cmd |
+| 35 | BSPC | BackSpace |
+| 36 | ENTER/Alt | tap=Enter / hold=Alt（AeroSpace用） |
+| 37 | RSHFT | Shift |
+| 38 | none | 未割当 |
+| 39 | ss_ht | tap=Cmd+Shift+4 / hold=Cmd+Shift+5 |
+
+## NUMレイヤー（SPACE長押し中）
+
+```
+┌─────┬─────┬─────┬─────┬─────┐  ┌─────┬─────┬─────┬─────┬─────┐
+│  -  │  1  │  2  │  3  │  +  │  │  ^  │  &  │  ~  │  (  │  )  │
+├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
+│  /  │  4  │  5  │  6  │  0  │  │  !  │  @  │  #  │  $  │  %  │
+├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
+│  *  │  7  │  8  │  9  │  .  │  │  [  │  ]  │  {  │  }  │  \  │
+└─────┴─────┴─────┴─────┴─────┘  └─────┴─────┴─────┴─────┴─────┘
+```
+
+- `_` = Shift+`-`、`|` = Shift+`\` で取得
+
+## FUNCレイヤー（位置31長押し中）
+
+```
+┌─────┬─────┬─────┬─────┬─────┐  ┌──────┬──────┬─────┬──────┬──────────┐
+│ F1  │ F2  │ F3  │ F4  │ F5  │  │bt_mac│bt_win│ MC  │BT_CLR│BT_CLR_ALL│
+├─────┼─────┼─────┼─────┼─────┤  ├──────┼──────┼─────┼──────┼──────────┤
+│ F6  │ F7  │ F8  │ F9  │ F10 │  │  -   │  -   │  -  │  -   │    -     │
+├─────┼─────┼─────┼─────┼─────┤  ├──────┼──────┼─────┼──────┼──────────┤
+│ F11 │ F12 │  -  │  -  │  -  │  │  -   │  -   │  -  │  -   │    -     │
+└─────┴─────┴─────┴─────┴─────┘  └──────┴──────┴─────┴──────┴──────────┘
+```
+
+| 機能 | 動作 |
+|------|------|
+| bt_mac | BT0プロファイル + Macレイヤー固定 |
+| bt_win | BT1プロファイル + Winレイヤー固定 |
+| MC | Mission Control (Ctrl+↑) |
+| BT_CLR | 現在のBTプロファイルをクリア |
+| BT_CLR_ALL | 全BTプロファイルをクリア |
+
+## コンボ一覧
+
+| キー | 動作 | 用途 |
+|------|------|------|
+| Q + W | ESC | キャンセル/Vim |
+| A + S | TAB | タブキー |
+| D + F | LANG2(英数) | IME英数（Cmd-tapと冗長） |
+| J + K | 左クリック | マウスボタン1 |
+| K + L | 右クリック | マウスボタン2 |
+| U + I | Ctrl+Shift+Tab | 前のタブ |
+| I + O | Ctrl+Tab | 次のタブ |
+| M + , | Cmd+[ | ブラウザ戻る |
+| , + . | Cmd+] | ブラウザ進む |
+
+タイムアウト: 50ms
+
+## ホストツール側ショートカット
+
+### AltTab
+- **Cmd+Tab**: ウィンドウ単位で切替（macOS標準のアプリ単位を置換）
+- 設定で Alt 起動に変更可
+
+### AeroSpace（タイル型WM、ワークスペース1〜5）
+
+| キー | 動作 |
+|------|------|
+| **Alt+H/J/K/L** | フォーカス移動（vim風 左/下/上/右） |
+| **Alt+Shift+H/J/K/L** | ウィンドウ移動 |
+| **Alt+1〜5** | ワークスペース1〜5へ切替 |
+| **Alt+Shift+1〜5** | 選択中ウィンドウをワークスペース1〜5へ移動 |
+| **Alt+Tab** | 直前のワークスペースに戻る |
+| **Alt+,** | 分割向き切替（横⇔縦） |
+| **Alt+/** | tiles ⇔ accordion 切替 |
+| **Alt+Shift+Space** | floating ⇔ tiling 切替 |
+| **Alt+F** | フルスクリーン |
+| **Alt+M** | macOS native fullscreen |
+| **Alt+R** | リサイズモード（h/j/k/l でサイズ調整、Esc/Enter で抜ける） |
+| **Alt+Shift+;** | サービスモード（reload, flatten 等） |
+
+### KobitoKey から AeroSpace を操作
+
+| AeroSpace | KobitoKey 操作 |
+|-----------|----------------|
+| Alt+H/J/K/L | ENTER長押し + H/J/K/L |
+| Alt+Shift+H/J/K/L | ENTER長押し + RSHFT長押し + H/J/K/L |
+| Alt+1〜5 | ENTER長押し + SPACE長押し + W/E/R/S/D（NUM層の数字位置） |
+| Alt+/ | ENTER長押し + NUM層の `/` 位置（`A`） |
+| Alt+, | ENTER長押し + `,` |
+
+## レイヤー画像
+
+旧レイヤー画像は廃止済み。最新は本READMEを参照。
