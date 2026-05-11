@@ -59,8 +59,24 @@
             <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>;
 };
 
+/ {
+    /omit-if-no-ref/ zip_temp_layer: zip_temp_layer {
+        compatible = "zmk,input-processor-temp-layer";
+        #input-processor-cells = <2>;
+        require-prior-idle-ms = <350>;
+        excluded-positions = <6 7 8>;  /* U/I/O = MB1/MB3/MB2 */
+    };
+};
+
 &tb_right_listener {
     status = "okay";
 
-    input-processors = <&sensor_rotation_right>;
+    /* デフォルト: cursor + 動作時に自動でMOUSEレイヤー(4)滞留 */
+    input-processors = <&sensor_rotation_right>, <&zip_temp_layer 4 5000>;
+
+    /* SCROLLレイヤー(5)中: スクロール挙動 */
+    scroll_mode {
+        layers = <5>;
+        input-processors = <&sensor_rotation_right>, <&zip_xy_to_scroll_mapper>, <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>;
+    };
 };

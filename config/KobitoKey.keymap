@@ -8,6 +8,8 @@
 #define WIN      1
 #define NUM      2
 #define FUNC     3
+#define MOUSE    4
+#define SCROLL   5
 
 / {
     behaviors {
@@ -122,11 +124,12 @@
 
         // Layer 0: Mac (Cmd tap=Ctrl+Space で macOS入力ソーストグル)
         // ENTER hold=LALT (AeroSpaceでAlt+◯◯多用するため)
+        // ; → -, ' → / に置換（記号利便性）
         mac_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T               &kp Y     &kp U           &kp I      &kp O    &kp P
-&kp A     &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &kp L    &kp SEMI
-&kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &kp APOS
+&kp A     &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &lt SCROLL L  &kp MINUS
+&kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
 &kp LALT  &mo FUNC  &kp LCTRL  &lt NUM SPACE  &mt LCMD LC(SPACE)  &kp BSPC  &mt LALT ENTER  &kp RSHFT  &none    &ss_ht LG(LS(N5)) LG(LS(N4))
             >;
         };
@@ -135,19 +138,22 @@
         win_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T                           &kp Y     &kp U           &kp I      &kp O    &kp P
-&kp A     &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &kp L    &kp SEMI
-&kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &kp APOS
+&kp A     &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &lt SCROLL L  &kp MINUS
+&kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
 &kp LGUI  &mo FUNC  &kp LCTRL  &lt NUM SPACE  &ctrl_muhen LCTRL INT_MUHENKAN  &kp BSPC  &mt LALT ENTER  &kp RSHFT  &none    &kp LG(LS(S))
             >;
         };
 
         // Layer 2: NUM (記号もここに集約)
+        // ; と ' をデフォルトから移したのでここで提供
+        // 19番: % → ; / 24番: . → \ / 29番: \ → '
+        // % は Shift+5、. はデフォルトの28番でアクセス可能
         num_layer {
             label = "NUMBER";
             bindings = <
 &kp MINUS  &kp N1  &kp N2  &kp N3  &kp PLUS   &kp CARET  &kp AMPS  &kp TILDE  &kp LPAR  &kp RPAR
-&kp SLASH  &kp N4  &kp N5  &kp N6  &kp N0     &kp EXCL   &kp AT    &kp HASH   &kp DLLR  &kp PRCNT
-&kp ASTRK  &kp N7  &kp N8  &kp N9  &kp DOT    &kp LBKT   &kp RBKT  &kp LBRC   &kp RBRC  &kp BSLH
+&kp SLASH  &kp N4  &kp N5  &kp N6  &kp N0     &kp EXCL   &kp AT    &kp HASH   &kp DLLR  &kp SEMI
+&kp ASTRK  &kp N7  &kp N8  &kp N9  &kp BSLH   &kp LBKT   &kp RBKT  &kp LBRC   &kp RBRC  &kp APOS
 &trans     &trans  &trans  &trans  &trans     &trans     &trans    &trans     &trans    &trans
             >;
         };
@@ -162,6 +168,29 @@
 &kp F6   &kp F7   &kp F8   &kp F9   &kp F10        &trans     &trans    &trans      &trans      &trans
 &kp F11  &kp F12  &trans   &trans   &trans         &trans     &trans    &trans      &trans      &trans
 &trans   &trans   &trans   &trans   &trans         &trans     &trans    &trans      &trans      &trans
+            >;
+        };
+
+        // Layer 4: MOUSE (右ボール動かしたら自動進入)
+        // U/I/O = MB1/MB3/MB2、他はtrans
+        mouse_layer {
+            label = "MOUSE";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans
+            >;
+        };
+
+        // Layer 5: SCROLL (L長押し中、右ボールがスクロール挙動)
+        scroll_layer {
+            label = "SCROLL";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
     };
