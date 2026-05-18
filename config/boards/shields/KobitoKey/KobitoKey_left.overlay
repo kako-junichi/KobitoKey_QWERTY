@@ -61,8 +61,8 @@
     status = "okay";
     device = <&tb_left>;
 
-    /* デフォルト: cursor + 動作時に自動でMOUSEレイヤー(4)滞留 */
-    input-processors = <&sensor_rotation_left>, <&zip_temp_layer 4 2000>;
+    /* デフォルト: cursor のみ（MOUSEレイヤーは手動切替: 位置38 &mo MOUSE） */
+    input-processors = <&sensor_rotation_left>;
 
     /* SCROLLレイヤー(5)中: 旧左ボールと同じスクロール挙動 */
     scroll_mode {
@@ -80,8 +80,8 @@
 &tb_right_listener {
     status = "okay";
 
-    /* デフォルト: cursor + 動作時に自動でMOUSEレイヤー(4)滞留 */
-    input-processors = <&sensor_rotation_right>, <&zip_temp_layer 4 2000>;
+    /* デフォルト: cursor のみ */
+    input-processors = <&sensor_rotation_right>;
 
     /* SCROLLレイヤー(5)中: 旧左ボールと同じスクロール挙動 */
     scroll_mode {
