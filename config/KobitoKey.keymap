@@ -76,20 +76,6 @@
             bindings = <&kp LANG2>;
         };
 
-        // 左クリック: J + K
-        combo_lclick {
-            timeout-ms = <50>;
-            key-positions = <16 17>;
-            bindings = <&mkp MB1>;
-        };
-
-        // 右クリック: K + L
-        combo_rclick {
-            timeout-ms = <50>;
-            key-positions = <17 18>;
-            bindings = <&mkp MB2>;
-        };
-
         // 前タブ: U + I (Ctrl+Shift+Tab)
         combo_tab_prev {
             timeout-ms = <50>;
@@ -171,15 +157,15 @@
             >;
         };
 
-        // Layer 4: MOUSE (右ボール動かしたら自動進入)
-        // U/I/O = MB1/MB3/MB2、他はtrans
+        // Layer 4: MOUSE (どちらのボールでも動かしたら自動進入)
+        // 左手 S/D/F = MB1/MB3/MB2、右手 J/K/L = MB1/MB3/MB2
         mouse_layer {
             label = "MOUSE";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans    &trans    &trans    &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
+&trans  &trans    &trans    &trans    &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans    &trans    &trans    &trans  &trans  &trans    &trans    &trans    &trans
             >;
         };
 

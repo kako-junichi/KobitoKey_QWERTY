@@ -51,7 +51,9 @@
         compatible = "zmk,input-processor-temp-layer";
         #input-processor-cells = <2>;
         require-prior-idle-ms = <350>;
-        excluded-positions = <6 7 8>;  /* U/I/O = MB1/MB3/MB2 */
+        /* MOUSEレイヤーで MB1/MB3/MB2 を割り当てたキー位置を除外
+           左手 S(11)/D(12)/F(13)、右手 J(16)/K(17)/L(18) */
+        excluded-positions = <11 12 13 16 17 18>;
     };
 };
 
