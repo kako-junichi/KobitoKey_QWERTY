@@ -114,7 +114,7 @@
         mac_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T               &kp Y     &kp U           &kp I      &kp O    &kp P
-&lt SCROLL A  &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &kp L         &kp MINUS
+&lt SCROLL A  &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &kp L         &lt SCROLL MINUS
 &kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
 &kp LALT  &mo FUNC  &kp LCTRL  &lt NUM SPACE  &mt LCMD LC(SPACE)  &kp BSPC  &mt LALT ENTER  &kp RSHFT  &mo MOUSE  &ss_ht LG(LS(N5)) LG(LS(N4))
             >;
@@ -124,7 +124,7 @@
         win_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T                           &kp Y     &kp U           &kp I      &kp O    &kp P
-&lt SCROLL A  &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &kp L         &kp MINUS
+&lt SCROLL A  &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &kp L         &lt SCROLL MINUS
 &kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
 &kp LGUI  &mo FUNC  &kp LCTRL  &lt NUM SPACE  &ctrl_muhen LCTRL INT_MUHENKAN  &kp BSPC  &mt LALT ENTER  &kp RSHFT  &mo MOUSE  &kp LG(LS(S))
             >;
