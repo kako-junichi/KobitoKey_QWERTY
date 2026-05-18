@@ -115,7 +115,7 @@
 &kp Q     &kp W     &kp E      &kp R          &kp T               &kp Y     &kp U           &kp I      &kp O    &kp P
 &kp A     &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &kp L     &kp MINUS
 &kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
-&kp LALT  &mo FUNC  &kp LCTRL  &lt NUM SPACE  &mt LCMD LC(SPACE)  &kp BSPC  &mt LALT ENTER  &kp RSHFT  &mo MOUSE  &ss_ht LG(LS(N5)) LG(LS(N4))
+&kp LALT  &mo FUNC  &kp LCTRL  &lt NUM SPACE  &mt LCMD LC(SPACE)  &kp BSPC  &mt LALT ENTER  &kp RSHFT  &none  &ss_ht LG(LS(N5)) LG(LS(N4))
             >;
         };
 
@@ -125,7 +125,7 @@
 &kp Q     &kp W     &kp E      &kp R          &kp T                           &kp Y     &kp U           &kp I      &kp O    &kp P
 &kp A         &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &kp L     &kp MINUS
 &kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
-&kp LGUI  &mo FUNC  &kp LCTRL  &lt NUM SPACE  &ctrl_muhen LCTRL INT_MUHENKAN  &kp BSPC  &mt LALT ENTER  &kp RSHFT  &mo MOUSE  &kp LG(LS(S))
+&kp LGUI  &mo FUNC  &kp LCTRL  &lt NUM SPACE  &ctrl_muhen LCTRL INT_MUHENKAN  &kp BSPC  &mt LALT ENTER  &kp RSHFT  &none  &kp LG(LS(S))
             >;
         };
 
@@ -156,9 +156,8 @@
             >;
         };
 
-        // Layer 4: MOUSE (位置38長押し中)
+        // Layer 4: MOUSE (ボール動作で自動進入、2秒滞留)
         // 左手 S/D/F = MB1/MB3/MB2、右手 J/K/L = MB1/MB3/MB2
-        // この層中はどちらのボールもスクロール挙動になる（overlay側で処理）
         mouse_layer {
             label = "MOUSE";
             bindings = <
