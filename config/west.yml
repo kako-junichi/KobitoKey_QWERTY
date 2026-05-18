@@ -2,8 +2,8 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: kumamuk-git
-      url-base: https://github.com/kumamuk-git
+    - name: badjeff
+      url-base: https://github.com/badjeff
     - name: hsgw
       url-base: https://github.com/hsgw
     - name: caksoylar  # <-- led
@@ -16,10 +16,10 @@ manifest:
       revision: v0.3
       import: app/west.yml
 
-    # PMW3610 ドライバ（kumamuk-git版: scroll-layers/automouse-layer内蔵）
+    # PMW3610 ドライバ（外部モジュール）
     - name: zmk-pmw3610-driver
-      remote: kumamuk-git
-      revision: main
+      remote: badjeff
+      revision: zmk-0.3
 
     # Sensor-rotation
     - name: zmk-feature-sensor_rotation
