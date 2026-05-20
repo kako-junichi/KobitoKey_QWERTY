@@ -32,6 +32,18 @@
             tapping-term-ms = <200>;
             flavor = "balanced";
         };
+
+        // 文字キー上のレイヤーホールド (tap-preferred で文字入力優先)
+        // ホールド時間を長めにとり、誤発動を抑える
+        scroll_lt: scroll_lt {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SCROLL_LT";
+            bindings = <&mo>, <&kp>;
+            #binding-cells = <2>;
+            tapping-term-ms = <250>;
+            quick-tap-ms = <150>;
+            flavor = "tap-preferred";
+        };
     };
 
     macros {
@@ -114,7 +126,7 @@
         mac_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T               &kp Y     &kp U           &kp I      &kp O    &kp P
-&lt SCROLL A  &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &kp L     &lt SCROLL MINUS
+&scroll_lt SCROLL A  &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &kp L     &scroll_lt SCROLL MINUS
 &kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
 &kp LALT  &mo FUNC  &kp LCTRL  &lt NUM SPACE  &mt LCMD LC(SPACE)  &kp BSPC  &mt LALT ENTER  &kp RSHFT  &none  &ss_ht LG(LS(N5)) LG(LS(N4))
             >;
@@ -124,7 +136,7 @@
         win_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T                           &kp Y     &kp U           &kp I      &kp O    &kp P
-&lt SCROLL A  &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &kp L     &lt SCROLL MINUS
+&scroll_lt SCROLL A  &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &kp L     &scroll_lt SCROLL MINUS
 &kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
 &kp LGUI  &mo FUNC  &kp LCTRL  &lt NUM SPACE  &ctrl_muhen LCTRL INT_MUHENKAN  &kp BSPC  &mt LALT ENTER  &kp RSHFT  &none  &kp LG(LS(S))
             >;
