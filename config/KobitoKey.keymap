@@ -163,7 +163,7 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
 
-        // Space(NUM) + Enter(SYM) 同時押しで FUNC
+        // Space(NUM) + Enter(SYM) 同時押しで FUNC（Enter は右親指 内側）
         tri_layer {
             if-layers = <NUM SYM>;
             then-layer = <FUNC>;
@@ -175,7 +175,7 @@
 
         // Layer 0: Mac
         // 左親指 外側: Ctrl Alt / 内側3: Shift Space/NUM Cmd（最内=Cmd tap英数）
-        // 右親指 最内=Cmd tapかな / BSPC/AERO / Enter/SYM / その外: Delete/ARROW / SS
+        // 右親指 最内=Cmd tapかな / Enter/SYM / BSPC/AERO / その外: Delete/ARROW / SS
         // Tab は combo A+S。IME は Cmd tap が主、combo D+F / J+K も可
         // A と - は tap-preferred で SCROLL
         mac_layer {
@@ -183,7 +183,7 @@
 &kp Q     &kp W     &kp E      &kp R          &kp T               &kp Y     &kp U           &kp I      &kp O    &kp P
 &scroll_lt SCROLL A  &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &kp L     &scroll_lt SCROLL MINUS
 &kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
-&kp LCTRL  &kp LALT  &kp LSFT  &lt NUM SPACE  &mt LCMD LANG2  &mt RCMD LANG1  &lt AERO BACKSPACE  &lt SYM ENTER  &arrow_del ARROW 0  &ss_ht LG(LS(N5)) LG(LS(N4))
+&kp LCTRL  &kp LALT  &kp LSFT  &lt NUM SPACE  &mt LCMD LANG2  &mt RCMD LANG1  &lt SYM ENTER  &lt AERO BACKSPACE  &arrow_del ARROW 0  &ss_ht LG(LS(N5)) LG(LS(N4))
             >;
         };
 
@@ -193,7 +193,7 @@
 &kp Q     &kp W     &kp E      &kp R          &kp T                           &kp Y     &kp U           &kp I      &kp O    &kp P
 &scroll_lt SCROLL A  &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &kp L     &scroll_lt SCROLL MINUS
 &kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
-&kp LCTRL  &kp LALT  &kp LSFT  &lt NUM SPACE  &mt LGUI INT_MUHENKAN  &mt LGUI INT_HENKAN  &kp BACKSPACE  &lt SYM ENTER  &arrow_del ARROW 0  &kp LG(LS(S))
+&kp LCTRL  &kp LALT  &kp LSFT  &lt NUM SPACE  &mt LGUI INT_MUHENKAN  &mt LGUI INT_HENKAN  &lt SYM ENTER  &kp BACKSPACE  &arrow_del ARROW 0  &kp LG(LS(S))
             >;
         };
 
@@ -224,12 +224,13 @@
 
         // Layer 4: MOUSE (ボール動作で自動進入、5秒滞留 / roba と同じ)
         // 左手 S/D/F = MB1/MB3/MB2、右手 J/K/L = MB1/MB3/MB2
-        // N = 戻る / . = 進む / - = 次ディスプレイ
+        // N = 戻る / . = 進む / P = 次ディスプレイ
+        // A と - は &trans のまま（SCROLL 長押しを MOUSE 滞留中も効かせる）
         mouse_layer {
             label = "MOUSE";
             bindings = <
-&trans  &trans    &trans    &trans    &trans  &trans         &trans    &trans    &trans         &trans
-&trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans  &trans         &mkp MB1  &mkp MB3  &mkp MB2       &kp LC(LA(N))
+&trans  &trans    &trans    &trans    &trans  &trans         &trans    &trans    &trans         &kp LC(LA(N))
+&trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans  &trans         &mkp MB1  &mkp MB3  &mkp MB2       &trans
 &trans  &trans    &trans    &trans    &trans  &kp LG(LBKT)   &trans    &trans    &kp LG(RBKT)   &trans
 &trans  &trans    &trans    &trans    &trans  &trans         &trans    &trans    &trans         &trans
             >;
@@ -269,7 +270,7 @@
             >;
         };
 
-        // Layer 8: FUNCTION (NUM+SYM 同時 = Space+Enter)
+        // Layer 8: FUNCTION (NUM+SYM 同時 = Space + Enter)
         func_layer {
             label = "FUNCTION";
             bindings = <

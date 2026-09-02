@@ -7,18 +7,20 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 
 ## レイヤー一覧
 
-| Layer | 名前 | 進入方法 |
-|-------|------|----------|
-| 0 | MAC | デフォルト |
-| 1 | WIN | BT レイヤーで切替 |
-| 2 | NUM | 左親指 SPACE 長押し |
-| 3 | ARROW | Delete 長押し、または 2回押しで固定 |
-| 4 | MOUSE | どちらかのボールを動かすと自動進入（5秒滞留、roba と同じ） |
-| 5 | SCROLL | A もしくは `-` 長押し |
-| 6 | BT | 左親指 LCTRL + LSFT コンボ |
-| 7 | SYM | 右親指 ENTER 長押し |
-| 8 | FUNC | SPACE + ENTER 同時押し（NUM+SYM の tri-layer） |
-| 9 | AERO | 右親指 BSPC 長押し |
+
+| Layer | 名前     | 進入方法                                    |
+| ----- | ------ | --------------------------------------- |
+| 0     | MAC    | デフォルト                                   |
+| 1     | WIN    | BT レイヤーで切替                              |
+| 2     | NUM    | 左親指 SPACE 長押し                           |
+| 3     | ARROW  | Delete 長押し、または 2回押しで固定                  |
+| 4     | MOUSE  | どちらかのボールを動かすと自動進入（5秒滞留、roba と同じ）        |
+| 5     | SCROLL | A もしくは `-` 長押し                          |
+| 6     | BT     | 左親指 LCTRL + LSFT コンボ                    |
+| 7     | SYM    | 右親指 ENTER 長押し（内側）                      |
+| 8     | FUNC   | SPACE + ENTER 同時押し（NUM+SYM の tri-layer） |
+| 9     | AERO   | 右親指 BSPC 長押し（内側）                       |
+
 
 ## デフォルトレイヤー（Mac）
 
@@ -30,31 +32,35 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 ├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
 │  Z  │  X  │  C  │  V  │  B  │  │  N  │  M  │  ,  │  .  │  /  │
 ├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
-│LCTRL│LALT │LSFT │ SPC │ CMD │  │ CMD │BSPC │ ENT │ DEL │ ss  │
-│     │     │     │/NUM │/英数│  │/かな│/AERO│/SYM │/ARR │     │
+│LCTRL│LALT │LSFT │ SPC │ CMD │  │ CMD │ ENT │BSPC │ DEL │ ss  │
+│     │     │     │/NUM │/英数│  │/かな│/SYM │/AERO│/ARR │     │
 └─────┴─────┴─────┴─────┴─────┘  └─────┴─────┴─────┴─────┴─────┘
 ```
 
-- **A** および **`-`** 長押しで SCROLL（両手から呼べる。roba は `-` のみ）
+- **A** および `-` 長押しで SCROLL（両手から呼べる。roba は `-` のみ）
 - `;` `'` は内列が無いので SYM へ。`=` は combo `C+V`、`"` は combo `L+-`
 - IME は両手最内の Cmd tap（左=英数 / 右=かな）。combo の D+F / J+K でも可
 
+
+
 ### 親指キー
 
-| 位置 | キー | 動作 |
-|------|------|------|
-| 30 | LCTRL | Ctrl（外側） |
-| 31 | LALT | Alt（外側。Raycast の Option+Space 用） |
-| 32 | LSFT | Shift（内側。roba と同じく左手） |
-| 33 | SPACE/NUM | tap=SPACE / hold=NUM（内側） |
-| 34 | LCMD/英数 | tap=英数 / hold=Cmd（内側・最内） |
-| 35 | RCMD/かな | tap=かな / hold=Cmd（内側・最内） |
-| 36 | BSPC/AERO | tap=BackSpace / hold=AERO（内側） |
-| 37 | ENTER/SYM | tap=Enter / hold=SYM（内側） |
-| 38 | DEL/ARROW | 1回=Delete / 長押し=ARROW / 2回=ARROW固定（同じキーでもう一度で解除） |
-| 39 | ss_ht | tap=Cmd+Shift+4 / hold=Cmd+Shift+5（外側） |
 
-両手の一番内側を Cmd にして英数/かなを tap に戻した。右の内側3は Cmd / BSPC / Enter。ARROW はその一つ外側で tap=Delete。Tab は combo `A+S`。
+| 位置  | キー        | 動作                                               |
+| --- | --------- | ------------------------------------------------ |
+| 30  | LCTRL     | Ctrl（外側）                                         |
+| 31  | LALT      | Alt（外側。Raycast の Option+Space 用）                 |
+| 32  | LSFT      | Shift（内側。roba と同じく左手）                            |
+| 33  | SPACE/NUM | tap=SPACE / hold=NUM（内側）                         |
+| 34  | LCMD/英数   | tap=英数 / hold=Cmd（内側・最内）                         |
+| 35  | RCMD/かな   | tap=かな / hold=Cmd（内側・最内）                         |
+| 36  | ENTER/SYM | tap=Enter / hold=SYM（内側）                         |
+| 37  | BSPC/AERO | tap=BackSpace / hold=AERO（内側）                    |
+| 38  | DEL/ARROW | 1回=Delete / 長押し=ARROW / 2回=ARROW固定（同じキーでもう一度で解除） |
+| 39  | ss_ht     | tap=Cmd+Shift+4 / hold=Cmd+Shift+5（外側）           |
+
+
+両手の一番内側を Cmd にして英数/かなを tap に戻した。右の内側3は Cmd / Enter / BSPC。ARROW はその一つ外側で tap=Delete。Tab は combo `A+S`。
 
 ## NUMレイヤー（SPACE 長押し）
 
@@ -71,6 +77,8 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 - 左手 = 電卓配列（キーパッド数字）
 - 右手 = macOS Spaces（Ctrl+1〜5 直ジャンプ、J/L = 左右スペース、K = Mission Control）
 - 記号は SYM（ENTER 長押し）へ分離
+
+
 
 ## ARROWレイヤー（Delete 長押し、または 2回押し）
 
@@ -89,6 +97,8 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 - 長押し中だけ入る（離すと戻る）。2回押しは固定で、同じキーをもう一度押すと解除
 - 1回押しの Delete は 2回目待ちのため約 200ms 遅れる
 
+
+
 ## SYMレイヤー（ENTER 長押し）
 
 ```
@@ -104,6 +114,8 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 - 上段は US 数字段の Shift と同じ並び
 - `;` `'` は roba 内列の代替
 
+
+
 ## FUNCレイヤー（SPACE + ENTER 同時押し）
 
 ```
@@ -115,6 +127,8 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 │  -  │  -  │  -  │  -  │  -  │  │  -  │  -  │  -  │ F11 │ F12 │
 └─────┴─────┴─────┴─────┴─────┘  └─────┴─────┴─────┴─────┴─────┘
 ```
+
+
 
 ## AEROレイヤー（BSPC 長押し / AeroSpace）
 
@@ -128,18 +142,20 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 └─────┴─────┴─────┴─────┴─────┘  └─────┴─────┴─────┴─────┴─────┘
 ```
 
-| 位置 | 動作 |
-|------|------|
-| 左上段 Q〜T | ワークスペース 1〜5（Alt+1〜5） |
-| 左ホーム A〜G | ウィンドウを WS へ移動（Alt+Shift+1〜5） |
-| 右ホーム H/J/K/L | フォーカス移動（Alt+H/J/K/L） |
-| 右下段 N/M/,/. | ウィンドウ移動（Alt+Shift+H/J/K/L、Shift 不要） |
-| Y | 直前 WS（Alt+Tab） |
-| U | フルスクリーン（Alt+F） |
-| I | macOS native fullscreen（Alt+M） |
-| O | リサイズモード（Alt+R） |
-| P | 分割向き切替（Alt+,） |
-| / | tiles ⇔ accordion（Alt+/） |
+
+| 位置           | 動作                                  |
+| ------------ | ----------------------------------- |
+| 左上段 Q〜T      | ワークスペース 1〜5（Alt+1〜5）                |
+| 左ホーム A〜G     | ウィンドウを WS へ移動（Alt+Shift+1〜5）        |
+| 右ホーム H/J/K/L | フォーカス移動（Alt+H/J/K/L）                |
+| 右下段 N/M/,/.  | ウィンドウ移動（Alt+Shift+H/J/K/L、Shift 不要） |
+| Y            | 直前 WS（Alt+Tab）                      |
+| U            | フルスクリーン（Alt+F）                      |
+| I            | macOS native fullscreen（Alt+M）      |
+| O            | リサイズモード（Alt+R）                      |
+| P            | 分割向き切替（Alt+,）                       |
+| /            | tiles ⇔ accordion（Alt+/）            |
+
 
 AeroSpace 設定本体は `~/.config/aerospace/aerospace.toml`。このレイヤーは Alt+◯◯ を送るだけなので toml 側の変更は不要。
 
@@ -158,21 +174,26 @@ AeroSpace 設定本体は `~/.config/aerospace/aerospace.toml`。このレイヤ
 - 右親指 SS 位置 = BT_CLR_ALL
 - `bt_mac` = BT0 + Mac レイヤー固定、`bt_win` = BT1 + Win レイヤー固定
 
+
+
 ## MOUSEレイヤー（ボール動作で自動進入、5秒滞留）
 
 ```
 ┌─────┬─────┬─────┬─────┬─────┐  ┌─────┬─────┬─────┬─────┬─────┐
-│  -  │  -  │  -  │  -  │  -  │  │  -  │  -  │  -  │  -  │  -  │
+│  -  │  -  │  -  │  -  │  -  │  │  -  │  -  │  -  │  -  │次画面│
 ├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
-│  -  │ MB1 │ MB3 │ MB2 │  -  │  │  -  │ MB1 │ MB3 │ MB2 │次画面│
+│  -  │ MB1 │ MB3 │ MB2 │  -  │  │  -  │ MB1 │ MB3 │ MB2 │  -  │
 ├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
 │  -  │  -  │  -  │  -  │  -  │  │戻る │  -  │  -  │進む │  -  │
 └─────┴─────┴─────┴─────┴─────┘  └─────┴─────┴─────┴─────┴─────┘
 ```
 
 - 左手 S/D/F = MB1/MB3/MB2、右手 J/K/L = MB1/MB3/MB2（両手クリックは KobitoKey 側の利点）
-- N = Cmd+[（戻る）/ `.` = Cmd+]（進む）/ `-` = 次ディスプレイ（Ctrl+Alt+N）
+- N = Cmd+[（戻る）/ `.` = Cmd+]（進む）/ `P` = 次ディスプレイ（Ctrl+Alt+N）
+- `-` は MOUSE 中も透過のまま。ボール滞留中に `-` を長押ししても SCROLL に入れる
 - クリック・戻る/進む・次ディスプレイは滞留時間延長から除外
+
+
 
 ## SCROLLレイヤー（A or `-` 長押し）
 
@@ -181,29 +202,38 @@ AeroSpace 設定本体は `~/.config/aerospace/aerospace.toml`。このレイヤ
 - A 離す / `-` 離す → 通常モードへ復帰
 - スクロール量は roba の `SCROLL_TICK=32` に合わせ、zip scaler を 1/32 にしている
 
+
+
 ## コンボ一覧
 
-| キー | 動作 | 用途 |
-|------|------|------|
-| Q + W | ESC | キャンセル/Vim |
-| A + S | TAB | タブキー |
-| D + F | 英数（LANG2） | IME 英数 |
-| J + K | かな（LANG1） | IME かな |
-| L + `-` | `"` | ダブルクォート |
-| C + V | `=` | イコール |
-| U + I | Ctrl+Shift+Tab | 前のタブ |
-| I + O | Ctrl+Tab | 次のタブ |
-| M + `,` | Cmd+[ | ブラウザ戻る |
-| `,` + `.` | Cmd+] | ブラウザ進む |
-| LCTRL + LSFT | BT レイヤー | Bluetooth / Mac・Win 切替 |
+
+| キー           | 動作             | 用途                     |
+| ------------ | -------------- | ---------------------- |
+| Q + W        | ESC            | キャンセル/Vim              |
+| A + S        | TAB            | タブキー                   |
+| D + F        | 英数（LANG2）      | IME 英数                 |
+| J + K        | かな（LANG1）      | IME かな                 |
+| L + `-`      | `"`            | ダブルクォート                |
+| C + V        | `=`            | イコール                   |
+| U + I        | Ctrl+Shift+Tab | 前のタブ                   |
+| I + O        | Ctrl+Tab       | 次のタブ                   |
+| M + `,`      | Cmd+[          | ブラウザ戻る                 |
+| `,` + `.`    | Cmd+]          | ブラウザ進む                 |
+| LCTRL + LSFT | BT レイヤー        | Bluetooth / Mac・Win 切替 |
+
 
 タイムアウト: 50ms
 
 ## ホストツール側ショートカット
 
+
+
 ### Raycast（推奨）
+
 - `Option+Space` で Raycast 起動（左親指 LALT + SPACE）
 - "Switch Windows" コマンド → 検索付きウィンドウ切替
+
+
 
 ### AeroSpace
 
