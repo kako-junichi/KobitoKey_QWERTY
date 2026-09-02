@@ -200,7 +200,7 @@ AeroSpace 設定本体は `~/.config/aerospace/aerospace.toml`。このレイヤ
 - 全キー透過
 - **どちらのボールもスクロール挙動になる**
 - A 離す / `-` 離す → 通常モードへ復帰
-- スクロール量は roba の `SCROLL_TICK=32` に合わせ、zip scaler を 1/32 にしている
+- スクロール量は roba の `SCROLL_TICK=32` に合わせ、左ボールは 1/32、右ボールは CPI 差（200 vs 600）を相殺するため 1/96
 
 
 
