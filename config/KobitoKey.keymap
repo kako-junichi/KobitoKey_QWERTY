@@ -7,9 +7,18 @@
 #define MAC      0
 #define WIN      1
 #define NUM      2
-#define FUNC     3
+#define ARROW    3
 #define MOUSE    4
 #define SCROLL   5
+#define BT       6
+#define SYM      7
+#define FUNC     8
+#define AERO     9
+
+&mt {
+    flavor = "balanced";
+    quick-tap-ms = <0>;
+};
 
 / {
     behaviors {
@@ -23,18 +32,7 @@
             flavor = "balanced";
         };
 
-        // Windows用: hold=LCTRL, tap=無変換(IME英数切替)
-        ctrl_muhen: ctrl_muhen {
-            compatible = "zmk,behavior-hold-tap";
-            label = "CTRL_MUHEN";
-            bindings = <&kp>, <&kp>;
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            flavor = "balanced";
-        };
-
         // 文字キー上のレイヤーホールド (tap-preferred で文字入力優先)
-        // ホールド時間を長めにとり、誤発動を抑える
         scroll_lt: scroll_lt {
             compatible = "zmk,behavior-hold-tap";
             label = "SCROLL_LT";
@@ -44,10 +42,28 @@
             quick-tap-ms = <150>;
             flavor = "tap-preferred";
         };
+
+        // Delete: 1回=Delete / 2回=ARROW固定 / 長押し=ARROW（押している間）
+        td_del_arrow: td_del_arrow {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TD_DEL_ARROW";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp DELETE>, <&tog ARROW>;
+        };
+
+        arrow_del: arrow_del {
+            compatible = "zmk,behavior-hold-tap";
+            label = "ARROW_DEL";
+            bindings = <&mo>, <&td_del_arrow>;
+            #binding-cells = <1>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <250>;
+            flavor = "balanced";
+        };
     };
 
     macros {
-        // BT0プロファイルに切替 + Macレイヤー固定
         bt_mac: bt_mac {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -55,7 +71,6 @@
             label = "BT_MAC";
         };
 
-        // BT1プロファイルに切替 + Winレイヤー固定
         bt_win: bt_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -88,6 +103,27 @@
             bindings = <&kp LANG2>;
         };
 
+        // かな: J + K
+        combo_kana {
+            timeout-ms = <50>;
+            key-positions = <16 17>;
+            bindings = <&kp LANG1>;
+        };
+
+        // ": L + -
+        combo_dquote {
+            timeout-ms = <50>;
+            key-positions = <18 19>;
+            bindings = <&kp DOUBLE_QUOTES>;
+        };
+
+        // =: C + V
+        combo_eq {
+            timeout-ms = <50>;
+            key-positions = <22 23>;
+            bindings = <&kp EQUAL>;
+        };
+
         // 前タブ: U + I (Ctrl+Shift+Tab)
         combo_tab_prev {
             timeout-ms = <50>;
@@ -115,73 +151,91 @@
             key-positions = <27 28>;
             bindings = <&kp LG(RBKT)>;
         };
+
+        // BTレイヤー: 左親指 外側Ctrl + 内側Shift
+        combo_bt {
+            timeout-ms = <50>;
+            key-positions = <30 32>;
+            bindings = <&mo BT>;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        // Space(NUM) + Enter(SYM) 同時押しで FUNC
+        tri_layer {
+            if-layers = <NUM SYM>;
+            then-layer = <FUNC>;
+        };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        // Layer 0: Mac (Cmd tap=Ctrl+Space で macOS入力ソーストグル)
-        // ENTER hold=LALT (AeroSpaceでAlt+◯◯多用するため)
-        // ; → -, ' → / に置換（記号利便性）
+        // Layer 0: Mac
+        // 左親指 外側: Ctrl Alt / 内側3: Shift Space/NUM Cmd（最内=Cmd tap英数）
+        // 右親指 最内=Cmd tapかな / BSPC/AERO / Enter/SYM / その外: Delete/ARROW / SS
+        // Tab は combo A+S。IME は Cmd tap が主、combo D+F / J+K も可
+        // A と - は tap-preferred で SCROLL
         mac_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T               &kp Y     &kp U           &kp I      &kp O    &kp P
 &scroll_lt SCROLL A  &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &kp L     &scroll_lt SCROLL MINUS
 &kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
-&kp LALT  &mo FUNC  &kp LCTRL  &lt NUM SPACE  &mt LCMD LC(SPACE)  &kp BSPC  &mt LALT ENTER  &kp RSHFT  &none  &ss_ht LG(LS(N5)) LG(LS(N4))
+&kp LCTRL  &kp LALT  &kp LSFT  &lt NUM SPACE  &mt LCMD LANG2  &mt RCMD LANG1  &lt AERO BACKSPACE  &lt SYM ENTER  &arrow_del ARROW  &ss_ht LG(LS(N5)) LG(LS(N4))
             >;
         };
 
-        // Layer 1: Windows
+        // Layer 1: Windows (MACと同じ役割分担 / Cmd相当=LGUI、英数/かな=無変換/変換)
         win_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T                           &kp Y     &kp U           &kp I      &kp O    &kp P
 &scroll_lt SCROLL A  &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &kp L     &scroll_lt SCROLL MINUS
 &kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
-&kp LGUI  &mo FUNC  &kp LCTRL  &lt NUM SPACE  &ctrl_muhen LCTRL INT_MUHENKAN  &kp BSPC  &mt LALT ENTER  &kp RSHFT  &none  &kp LG(LS(S))
+&kp LCTRL  &kp LALT  &kp LSFT  &lt NUM SPACE  &mt LGUI INT_MUHENKAN  &mt LGUI INT_HENKAN  &kp BACKSPACE  &lt SYM ENTER  &arrow_del ARROW  &kp LG(LS(S))
             >;
         };
 
-        // Layer 2: NUM (記号もここに集約)
-        // ; と ' をデフォルトから移したのでここで提供
-        // 19番: % → ; / 24番: . → \ / 29番: \ → '
-        // % は Shift+5、. はデフォルトの28番でアクセス可能
+        // Layer 2: NUM (SPACE 長押し)
+        // 左手=電卓 / 右手=macOS Spaces (Ctrl+1-5, J/L=左右スペース, K=Mission Control)
         num_layer {
             label = "NUMBER";
             bindings = <
-&kp MINUS  &kp N1  &kp N2  &kp N3  &kp PLUS   &kp CARET  &kp AMPS  &kp TILDE  &kp LPAR  &kp RPAR
-&kp SLASH  &kp N4  &kp N5  &kp N6  &kp N0     &kp EXCL   &kp AT    &kp HASH   &kp DLLR  &kp SEMI
-&kp ASTRK  &kp N7  &kp N8  &kp N9  &kp BSLH   &kp LBKT   &kp RBKT  &kp LBRC   &kp RBRC  &kp APOS
-&trans     &trans  &trans  &trans  &trans     &trans     &trans    &trans     &trans    &trans
+&kp MINUS                &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp PLUS     &kp LC(N1)  &kp LC(N2)    &kp LC(N3)  &kp LC(N4)     &kp LC(N5)
+&kp SLASH                &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_NUMBER_0  &trans      &kp LC(LEFT)  &kp LC(UP)  &kp LC(RIGHT)  &trans
+&mt LEFT_SHIFT ASTERISK  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PERIOD   &trans      &trans        &trans      &trans         &trans
+&trans                   &trans           &trans           &trans           &trans       &trans      &trans        &trans      &trans         &trans
             >;
         };
 
-        // Layer 3: FUNCTION
-        // F-keys + BT/MC + vim風矢印キー (H/J/K/L)
-        // ワークスペース切替は ENTER hold(Alt) + SPACE hold(NUM) + 数字位置 で代替
-        func_layer {
-            label = "FUNCTION";
+        // Layer 3: ARROW (Delete 長押し、または 2回押しで固定)
+        // 左手 E/S/D/F = 逆T字、右手 H/J/K/L = vim 風
+        // pos 38 は &tog ARROW（2回押しで入ったとき同じキーで解除）
+        arrow_layer {
+            label = "ARROW";
             bindings = <
-&kp F1   &kp F2   &kp F3   &kp F4   &kp F5         &bt_mac    &bt_win    &kp LC(UP)  &bt BT_CLR  &bt BT_CLR_ALL
-&kp F6   &kp F7   &kp F8   &kp F9   &kp F10        &kp LEFT   &kp DOWN   &kp UP      &kp RIGHT   &trans
-&kp F11  &kp F12  &trans   &trans   &trans         &trans     &trans     &trans      &trans      &trans
-&trans   &trans   &trans   &trans   &trans         &trans     &trans     &trans      &trans      &trans
+&kp ESCAPE  &kp LC(LS(TAB))  &kp UP_ARROW    &kp LC(TAB)      &trans  &trans  &trans          &trans        &trans        &trans
+&kp HOME    &kp LEFT_ARROW   &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp END  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &trans
+&kp LEFT_SHIFT  &trans       &trans          &trans           &trans  &trans  &trans          &trans        &trans        &trans
+&trans      &trans           &trans          &trans           &trans  &trans  &trans          &trans        &tog ARROW    &trans
             >;
         };
 
         // Layer 4: MOUSE (ボール動作で自動進入、2秒滞留)
         // 左手 S/D/F = MB1/MB3/MB2、右手 J/K/L = MB1/MB3/MB2
+        // N = 戻る / . = 進む / - = 次ディスプレイ
         mouse_layer {
             label = "MOUSE";
             bindings = <
-&trans  &trans    &trans    &trans    &trans  &trans  &trans    &trans    &trans    &trans
-&trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
-&trans  &trans    &trans    &trans    &trans  &trans  &trans    &trans    &trans    &trans
-&trans  &trans    &trans    &trans    &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans    &trans    &trans    &trans  &trans         &trans    &trans    &trans         &trans
+&trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans  &trans         &mkp MB1  &mkp MB3  &mkp MB2       &kp LC(LA(N))
+&trans  &trans    &trans    &trans    &trans  &kp LG(LBKT)   &trans    &trans    &kp LG(RBKT)   &trans
+&trans  &trans    &trans    &trans    &trans  &trans         &trans    &trans    &trans         &trans
             >;
         };
 
-        // Layer 5: SCROLL (A or - 長押し中、ボールがスクロール挙動)
+        // Layer 5: SCROLL (A or - 長押し中、両手ボールがスクロール)
         scroll_layer {
             label = "SCROLL";
             bindings = <
@@ -189,6 +243,52 @@
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        // Layer 6: BT設定 + Mac/Windows切替 (左親指 LCTRL+LSFT コンボ)
+        bt_layer {
+            label = "BT";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &bt_mac  &bt_win  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
+&trans  &trans  &trans  &trans  &trans  &trans   &trans   &trans        &trans        &trans
+&trans  &trans  &trans  &trans  &trans  &trans   &trans   &trans        &trans        &bt BT_CLR
+&trans  &trans  &trans  &trans  &trans  &trans   &trans   &trans        &trans        &bt BT_CLR_ALL
+            >;
+        };
+
+        // Layer 7: SYM (ENTER 長押し / US Shift 準拠)
+        // 内列が無いので ; ' を左下段へ
+        sym_layer {
+            label = "SYM";
+            bindings = <
+&kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT  &kp CARET  &kp AMPS  &kp ASTRK  &kp LPAR  &kp RPAR
+&kp GRAVE  &kp TILDE  &kp UNDER  &kp EQUAL  &kp PLUS   &kp MINUS  &kp LBKT  &kp RBKT   &kp LBRC  &kp RBRC
+&kp SEMI   &kp SQT    &kp LT     &kp GT     &kp BSLH   &kp PIPE   &trans    &trans     &trans    &trans
+&trans     &trans     &trans     &trans     &trans     &trans     &trans    &trans     &trans    &trans
+            >;
+        };
+
+        // Layer 8: FUNCTION (NUM+SYM 同時 = Space+Enter)
+        func_layer {
+            label = "FUNCTION";
+            bindings = <
+&kp C_BRI_DN  &kp C_BRI_UP  &trans       &trans  &trans  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5
+&kp C_MUTE    &kp C_VOL_DN  &kp C_VOL_UP  &trans  &trans  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10
+&trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &kp F11 &kp F12
+&trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        // Layer 9: AeroSpace (BACKSPACE 長押し)
+        // 左上段=WS1-5 / 左ホーム=WSへ移動 / 右ホーム=フォーカス / 右下段=ウィンドウ移動
+        aero_layer {
+            label = "AERO";
+            bindings = <
+&kp LA(N1)      &kp LA(N2)      &kp LA(N3)      &kp LA(N4)      &kp LA(N5)  &kp LA(TAB)    &kp LA(F)      &kp LA(M)      &kp LA(R)      &kp LA(COMMA)
+&kp LA(LS(N1))  &kp LA(LS(N2))  &kp LA(LS(N3))  &kp LA(LS(N4))  &kp LA(LS(N5))  &kp LA(H)  &kp LA(J)      &kp LA(K)      &kp LA(L)      &trans
+&trans          &trans          &trans          &trans          &trans      &kp LA(LS(H))  &kp LA(LS(J))  &kp LA(LS(K))  &kp LA(LS(L))  &kp LA(SLASH)
+&trans          &trans          &trans          &trans          &trans      &trans         &trans         &trans         &trans         &trans
             >;
         };
     };

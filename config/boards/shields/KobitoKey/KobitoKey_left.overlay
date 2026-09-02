@@ -50,8 +50,14 @@
         compatible = "zmk,input-processor-temp-layer";
         #input-processor-cells = <2>;
         require-prior-idle-ms = <350>;
-        /* MOUSE層のクリックキー位置は除外（押下しても滞留時間延長しない） */
-        excluded-positions = <11 12 13 16 17 18>;
+        /* MOUSE層のクリック・戻る/進む・次ディスプレイは除外（押下しても滞留時間延長しない） */
+        excluded-positions = <
+            11 12 13  // S/D/F 左クリック
+            16 17 18  // J/K/L 右クリック
+            19        // - 次ディスプレイ
+            25        // N 戻る
+            28        // . 進む
+        >;
     };
 };
 
