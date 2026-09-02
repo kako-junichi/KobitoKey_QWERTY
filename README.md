@@ -13,7 +13,7 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 | 1 | WIN | BT レイヤーで切替 |
 | 2 | NUM | 左親指 SPACE 長押し |
 | 3 | ARROW | Delete 長押し、または 2回押しで固定 |
-| 4 | MOUSE | どちらかのボールを動かすと自動進入（2秒滞留） |
+| 4 | MOUSE | どちらかのボールを動かすと自動進入（5秒滞留、roba と同じ） |
 | 5 | SCROLL | A もしくは `-` 長押し |
 | 6 | BT | 左親指 LCTRL + LSFT コンボ |
 | 7 | SYM | 右親指 ENTER 長押し |
@@ -158,7 +158,7 @@ AeroSpace 設定本体は `~/.config/aerospace/aerospace.toml`。このレイヤ
 - 右親指 SS 位置 = BT_CLR_ALL
 - `bt_mac` = BT0 + Mac レイヤー固定、`bt_win` = BT1 + Win レイヤー固定
 
-## MOUSEレイヤー（ボール動作で自動進入、2秒滞留）
+## MOUSEレイヤー（ボール動作で自動進入、5秒滞留）
 
 ```
 ┌─────┬─────┬─────┬─────┬─────┐  ┌─────┬─────┬─────┬─────┬─────┐
@@ -179,6 +179,7 @@ AeroSpace 設定本体は `~/.config/aerospace/aerospace.toml`。このレイヤ
 - 全キー透過
 - **どちらのボールもスクロール挙動になる**
 - A 離す / `-` 離す → 通常モードへ復帰
+- スクロール量は roba の `SCROLL_TICK=32` に合わせ、zip scaler を 1/32 にしている
 
 ## コンボ一覧
 

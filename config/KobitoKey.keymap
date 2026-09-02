@@ -222,7 +222,7 @@
             >;
         };
 
-        // Layer 4: MOUSE (ボール動作で自動進入、2秒滞留)
+        // Layer 4: MOUSE (ボール動作で自動進入、5秒滞留 / roba と同じ)
         // 左手 S/D/F = MB1/MB3/MB2、右手 J/K/L = MB1/MB3/MB2
         // N = 戻る / . = 進む / - = 次ディスプレイ
         mouse_layer {
