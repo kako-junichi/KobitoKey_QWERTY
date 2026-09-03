@@ -152,10 +152,10 @@
             bindings = <&kp LG(RBKT)>;
         };
 
-        // BTレイヤー: 左親指 外側Ctrl + 内側Shift
+        // BTレイヤー: 左親指 Ctrl + Shift
         combo_bt {
             timeout-ms = <50>;
-            key-positions = <30 32>;
+            key-positions = <31 32>;
             bindings = <&mo BT>;
         };
     };
@@ -174,26 +174,26 @@
         compatible = "zmk,keymap";
 
         // Layer 0: Mac
-        // 左親指 外側: Ctrl Alt / 内側3: Shift Space/NUM Cmd（最内=Cmd tap英数）
-        // 右親指 最内=Cmd tapかな / Enter/SYM / BSPC/AERO / その外: Delete/ARROW / SS
-        // Tab は combo A+S。IME は Cmd tap が主、combo D+F / J+K も可
+        // 左: Alt Ctrl Shift Space/NUM Cmd（Cmdは左手のみ・プレーン）
+        // 右内側3: Enter/SYM BSPC/AERO Ctrl / その外: Delete/ARROW SS
+        // Tab は combo A+S。IME は combo D+F=英数 / J+K=かな
         // A と - は tap-preferred で SCROLL
         mac_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T               &kp Y     &kp U           &kp I      &kp O    &kp P
 &scroll_lt SCROLL A  &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &kp L     &scroll_lt SCROLL MINUS
 &kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
-&kp LCTRL  &kp LALT  &kp LSFT  &lt NUM SPACE  &mt LCMD LANG2  &mt RCMD LANG1  &lt SYM ENTER  &lt AERO BACKSPACE  &arrow_del ARROW 0  &ss_ht LG(LS(N5)) LG(LS(N4))
+&kp LALT  &kp LCTRL  &kp LSFT  &lt NUM SPACE  &kp LCMD  &lt SYM ENTER  &lt AERO BACKSPACE  &kp LCTRL  &arrow_del ARROW 0  &ss_ht LG(LS(N5)) LG(LS(N4))
             >;
         };
 
-        // Layer 1: Windows (MACと同じ役割分担 / Cmd相当=LGUI、英数/かな=無変換/変換)
+        // Layer 1: Windows (MACと同じ役割分担 / Cmd相当=LGUI、IMEはコンボ)
         win_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T                           &kp Y     &kp U           &kp I      &kp O    &kp P
 &scroll_lt SCROLL A  &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &kp L     &scroll_lt SCROLL MINUS
 &kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
-&kp LCTRL  &kp LALT  &kp LSFT  &lt NUM SPACE  &mt LGUI INT_MUHENKAN  &mt LGUI INT_HENKAN  &lt SYM ENTER  &kp BACKSPACE  &arrow_del ARROW 0  &kp LG(LS(S))
+&kp LALT  &kp LCTRL  &kp LSFT  &lt NUM SPACE  &kp LGUI  &lt SYM ENTER  &kp BACKSPACE  &kp LCTRL  &arrow_del ARROW 0  &kp LG(LS(S))
             >;
         };
 

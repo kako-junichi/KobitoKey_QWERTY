@@ -16,7 +16,7 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 | 3     | ARROW  | Delete 長押し、または 2回押しで固定                  |
 | 4     | MOUSE  | どちらかのボールを動かすと自動進入（5秒滞留、roba と同じ）        |
 | 5     | SCROLL | A もしくは `-` 長押し                          |
-| 6     | BT     | 左親指 LCTRL + LSFT コンボ                    |
+| 6     | BT     | 左親指 Ctrl + Shift コンボ                    |
 | 7     | SYM    | 右親指 ENTER 長押し（内側）                      |
 | 8     | FUNC   | SPACE + ENTER 同時押し（NUM+SYM の tri-layer） |
 | 9     | AERO   | 右親指 BSPC 長押し（内側）                       |
@@ -32,14 +32,14 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 ├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
 │  Z  │  X  │  C  │  V  │  B  │  │  N  │  M  │  ,  │  .  │  /  │
 ├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
-│LCTRL│LALT │LSFT │ SPC │ CMD │  │ CMD │ ENT │BSPC │ DEL │ ss  │
-│     │     │     │/NUM │/英数│  │/かな│/SYM │/AERO│/ARR │     │
+│LALT │LCTRL│LSFT │ SPC │ CMD │  │ ENT │BSPC │CTRL │ DEL │ ss  │
+│     │     │     │/NUM │     │  │/SYM │/AERO│     │/ARR │     │
 └─────┴─────┴─────┴─────┴─────┘  └─────┴─────┴─────┴─────┴─────┘
 ```
 
 - **A** および `-` 長押しで SCROLL（両手から呼べる。roba は `-` のみ）
 - `;` `'` は内列が無いので SYM へ。`=` は combo `C+V`、`"` は combo `L+-`
-- IME は両手最内の Cmd tap（左=英数 / 右=かな）。combo の D+F / J+K でも可
+- IME は combo のみ（D+F=英数 / J+K=かな）。Cmd は左手1つで、hold-tap しない
 
 
 
@@ -48,19 +48,19 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 
 | 位置  | キー        | 動作                                               |
 | --- | --------- | ------------------------------------------------ |
-| 30  | LCTRL     | Ctrl（外側）                                         |
-| 31  | LALT      | Alt（外側。Raycast の Option+Space 用）                 |
-| 32  | LSFT      | Shift（内側。roba と同じく左手）                            |
+| 30  | LALT      | Alt（一番外側。Raycast の Option+Space 用）               |
+| 31  | LCTRL     | Ctrl（外側寄り。Shift と両方使うので端には置かない）             |
+| 32  | LSFT      | Shift（内側。Space の左）                                  |
 | 33  | SPACE/NUM | tap=SPACE / hold=NUM（内側）                         |
-| 34  | LCMD/英数   | tap=英数 / hold=Cmd（内側・最内）                         |
-| 35  | RCMD/かな   | tap=かな / hold=Cmd（内側・最内）                         |
-| 36  | ENTER/SYM | tap=Enter / hold=SYM（内側）                         |
-| 37  | BSPC/AERO | tap=BackSpace / hold=AERO（内側）                    |
+| 34  | LCMD      | Cmd（左手のみ。プレーン）                                  |
+| 35  | ENTER/SYM | tap=Enter / hold=SYM（右・最内）                         |
+| 36  | BSPC/AERO | tap=BackSpace / hold=AERO                              |
+| 37  | LCTRL     | Ctrl（右手）                                            |
 | 38  | DEL/ARROW | 1回=Delete / 長押し=ARROW / 2回=ARROW固定（同じキーでもう一度で解除） |
 | 39  | ss_ht     | tap=Cmd+Shift+4 / hold=Cmd+Shift+5（外側）           |
 
 
-両手の一番内側を Cmd にして英数/かなを tap に戻した。右の内側3は Cmd / Enter / BSPC。ARROW はその一つ外側で tap=Delete。Tab は combo `A+S`。
+Cmd は左手 Space の右に1つ。IME は combo。右の内側3は Enter / BSPC / Ctrl。ARROW はその一つ外側で tap=Delete。Tab は combo `A+S`。
 
 ## NUMレイヤー（SPACE 長押し）
 
@@ -159,7 +159,7 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 
 AeroSpace 設定本体は `~/.config/aerospace/aerospace.toml`。このレイヤーは Alt+◯◯ を送るだけなので toml 側の変更は不要。
 
-## BTレイヤー（左親指 LCTRL + LSFT）
+## BTレイヤー（左親指 Ctrl + Shift）
 
 ```
 ┌─────┬─────┬─────┬─────┬─────┐  ┌──────┬──────┬─────┬──────┬──────────┐
@@ -219,7 +219,7 @@ AeroSpace 設定本体は `~/.config/aerospace/aerospace.toml`。このレイヤ
 | I + O        | Ctrl+Tab       | 次のタブ                   |
 | M + `,`      | Cmd+[          | ブラウザ戻る                 |
 | `,` + `.`    | Cmd+]          | ブラウザ進む                 |
-| LCTRL + LSFT | BT レイヤー        | Bluetooth / Mac・Win 切替 |
+| Ctrl + Shift | BT レイヤー        | Bluetooth / Mac・Win 切替 |
 
 
 タイムアウト: 50ms
