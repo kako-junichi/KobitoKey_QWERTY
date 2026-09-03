@@ -9,6 +9,14 @@
         diode-direction = "col2row";
         wakeup-source;
 
+        /*
+         * KobitoKey はデフォルト 5ms だと全体でチャタリングしやすい。
+         * roBa では起きないが、両手 TB + SPI の本機ではバウンスを拾いやすいので
+         * press/release とも 20ms に上げる。
+         */
+        debounce-press-ms = <20>;
+        debounce-release-ms = <20>;
+
         /* Dピンは &xiao_d <番号> で指定（XIAOフォーマット） */
         row-gpios = <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>, /* 例: D0 */
                     <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>, /* 例: D1 */
