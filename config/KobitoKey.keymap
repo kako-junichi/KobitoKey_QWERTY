@@ -42,25 +42,6 @@
             quick-tap-ms = <150>;
             flavor = "tap-preferred";
         };
-
-        // Delete: 1回=Delete / 2回=ARROW固定 / 長押し=ARROW（押している間）
-        td_del_arrow: td_del_arrow {
-            compatible = "zmk,behavior-tap-dance";
-            label = "TD_DEL_ARROW";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp DELETE>, <&tog ARROW>;
-        };
-
-        arrow_del: arrow_del {
-            compatible = "zmk,behavior-hold-tap";
-            label = "ARROW_DEL";
-            bindings = <&mo>, <&td_del_arrow>;
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            quick-tap-ms = <250>;
-            flavor = "balanced";
-        };
     };
 
     macros {
@@ -175,15 +156,15 @@
 
         // Layer 0: Mac
         // 左: Alt Ctrl Shift Space/NUM Cmd（Cmdは左手のみ・プレーン）
-        // 右内側3: Enter/SYM BSPC/AERO Ctrl / その外: Delete/ARROW SS
+        // 右内側3: BSPC/AERO Enter/SYM Ctrl / その外: Delete SS
         // Tab は combo A+S。IME は combo D+F=英数 / J+K=かな
-        // A と - は tap-preferred で SCROLL
+        // A と - は SCROLL、/ は ARROW（いずれも tap-preferred）
         mac_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T               &kp Y     &kp U           &kp I      &kp O    &kp P
 &scroll_lt SCROLL A  &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &kp L     &scroll_lt SCROLL MINUS
-&kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
-&kp LALT  &kp LCTRL  &kp LSFT  &lt NUM SPACE  &kp LCMD  &lt SYM ENTER  &lt AERO BACKSPACE  &kp LCTRL  &arrow_del ARROW 0  &ss_ht LG(LS(N5)) LG(LS(N4))
+&kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &scroll_lt ARROW SLASH
+&kp LALT  &kp LCTRL  &kp LSFT  &lt NUM SPACE  &kp LCMD  &lt AERO BACKSPACE  &lt SYM ENTER  &kp LCTRL  &kp DELETE  &ss_ht LG(LS(N5)) LG(LS(N4))
             >;
         };
 
@@ -192,8 +173,8 @@
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T                           &kp Y     &kp U           &kp I      &kp O    &kp P
 &scroll_lt SCROLL A  &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &kp L     &scroll_lt SCROLL MINUS
-&kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
-&kp LALT  &kp LCTRL  &kp LSFT  &lt NUM SPACE  &kp LGUI  &lt SYM ENTER  &kp BACKSPACE  &kp LCTRL  &arrow_del ARROW 0  &kp LG(LS(S))
+&kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &scroll_lt ARROW SLASH
+&kp LALT  &kp LCTRL  &kp LSFT  &lt NUM SPACE  &kp LGUI  &kp BACKSPACE  &lt SYM ENTER  &kp LCTRL  &kp DELETE  &kp LG(LS(S))
             >;
         };
 
@@ -209,23 +190,22 @@
             >;
         };
 
-        // Layer 3: ARROW (Delete 長押し、または 2回押しで固定)
+        // Layer 3: ARROW (/ 長押し中)
         // 左手 E/S/D/F = 逆T字、右手 H/J/K/L = vim 風
-        // pos 38 は &tog ARROW（2回押しで入ったとき同じキーで解除）
         arrow_layer {
             label = "ARROW";
             bindings = <
 &kp ESCAPE  &kp LC(LS(TAB))  &kp UP_ARROW    &kp LC(TAB)      &trans  &trans  &trans          &trans        &trans        &trans
 &kp HOME    &kp LEFT_ARROW   &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp END  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &trans
 &kp LEFT_SHIFT  &trans       &trans          &trans           &trans  &trans  &trans          &trans        &trans        &trans
-&trans      &trans           &trans          &trans           &trans  &trans  &trans          &trans        &tog ARROW    &trans
+&trans      &trans           &trans          &trans           &trans  &trans  &trans          &trans        &trans        &trans
             >;
         };
 
         // Layer 4: MOUSE (ボール動作で自動進入、5秒滞留 / roba と同じ)
         // 左手 S/D/F = MB1/MB3/MB2、右手 J/K/L = MB1/MB3/MB2
         // N = 戻る / . = 進む / P = 次ディスプレイ
-        // A と - は &trans のまま（SCROLL 長押しを MOUSE 滞留中も効かせる）
+        // A と - は SCROLL、/ は ARROW（MOUSE 滞留中も効かせる）
         mouse_layer {
             label = "MOUSE";
             bindings = <
