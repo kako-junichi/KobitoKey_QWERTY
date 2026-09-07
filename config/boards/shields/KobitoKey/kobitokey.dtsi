@@ -10,11 +10,11 @@
         wakeup-source;
 
         /*
-         * デフォルト 5ms だとチャタしやすい。20/20 は打鍵が重い。
-         * 押し込みだけ 10ms、離しは 5ms（コンボ 50ms や連続打鍵を殺さない）。
+         * 5ms はチャタ、20ms は重い、10/5 は二度打ちが戻った。
+         * 押し 15ms / 離し 8ms で中間を取る。
          */
-        debounce-press-ms = <10>;
-        debounce-release-ms = <5>;
+        debounce-press-ms = <15>;
+        debounce-release-ms = <8>;
 
         /* Dピンは &xiao_d <番号> で指定（XIAOフォーマット） */
         row-gpios = <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>, /* 例: D0 */

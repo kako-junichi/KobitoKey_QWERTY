@@ -17,9 +17,9 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 | 4     | MOUSE  | どちらかのボールを動かすと自動進入（5秒滞留、roba と同じ）        |
 | 5     | SCROLL | A もしくは `-` 長押し                          |
 | 6     | BT     | 左親指 Ctrl + Shift コンボ                    |
-| 7     | SYM    | 右親指 ENTER 長押し（内側）                      |
+| 7     | SYM    | 右親指 ENTER 長押し（内側から2番目）            |
 | 8     | FUNC   | SPACE + ENTER 同時押し（NUM+SYM の tri-layer） |
-| 9     | AERO   | 右親指 BSPC 長押し（内側）                       |
+| 9     | AERO   | 右親指 BSPC 長押し（内側から4番目）             |
 
 
 ## デフォルトレイヤー（Mac）
@@ -32,14 +32,14 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 ├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
 │  Z  │  X  │  C  │  V  │  B  │  │  N  │  M  │  ,  │  .  │/ARR │
 ├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
-│LALT │LCTRL│LSFT │ SPC │ CMD │  │BSPC │ ENT │CTRL │ DEL │ ss  │
-│     │     │     │/NUM │     │  │/AERO│/SYM │     │     │     │
+│LALT │LCTRL│LSFT │ SPC │ CMD │  │ CMD │ ENT │CTRL │BSPC │ ss  │
+│     │     │     │/NUM │     │  │/かな│/SYM │     │/AERO│     │
 └─────┴─────┴─────┴─────┴─────┘  └─────┴─────┴─────┴─────┴─────┘
 ```
 
 - **A** および `-` 長押しで SCROLL、**`/`** 長押しで ARROW（どれも tap-preferred）
 - `;` `'` は内列が無いので SYM へ。`=` は combo `C+V`、`"` は combo `L+-`
-- IME は combo のみ（D+F=英数 / J+K=かな）。Cmd は左手1つで、hold-tap しない
+- IME は右最内 Cmd の tap=かな。英数は combo D+F（J+K でもかな）。左手 Cmd はプレーン
 
 
 
@@ -53,14 +53,14 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 | 32  | LSFT      | Shift（内側。Space の左）                                  |
 | 33  | SPACE/NUM | tap=SPACE / hold=NUM（内側）                         |
 | 34  | LCMD      | Cmd（左手のみ。プレーン）                                  |
-| 35  | BSPC/AERO | tap=BackSpace / hold=AERO（右・最内）                       |
+| 35  | RCMD/かな   | tap=かな / hold=Cmd（右・最内）                          |
 | 36  | ENTER/SYM | tap=Enter / hold=SYM                                   |
 | 37  | LCTRL     | Ctrl（右手）                                            |
-| 38  | DELETE    | Delete（プレーン）                                       |
+| 38  | BSPC/AERO | tap=BackSpace / hold=AERO                              |
 | 39  | ss_ht     | tap=Cmd+Shift+4 / hold=Cmd+Shift+5（外側）           |
 
 
-Cmd は左手 Space の右に1つ。IME は combo。右の内側3は BSPC / Enter / Ctrl。ARROW は `/` 長押し。Tab は combo `A+S`。
+左手 Cmd はプレーン。右最内は Cmd tap=かな。右は内側から Cmd / Enter / Ctrl / BSPC。Delete キーは無し（BSPC を使う）。ARROW は `/` 長押し。Tab は combo `A+S`。
 
 ## NUMレイヤー（SPACE 長押し）
 

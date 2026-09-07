@@ -155,26 +155,26 @@
         compatible = "zmk,keymap";
 
         // Layer 0: Mac
-        // 左: Alt Ctrl Shift Space/NUM Cmd（Cmdは左手のみ・プレーン）
-        // 右内側3: BSPC/AERO Enter/SYM Ctrl / その外: Delete SS
-        // Tab は combo A+S。IME は combo D+F=英数 / J+K=かな
+        // 左: Alt Ctrl Shift Space/NUM Cmd（左手Cmdはプレーン）
+        // 右内側から: Cmd tapかな / Enter/SYM / Ctrl / BSPC/AERO / SS
+        // Tab は combo A+S。IME は右Cmd tap=かな、combo D+F=英数 / J+K=かな
         // A と - は SCROLL、/ は ARROW（いずれも tap-preferred）
         mac_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T               &kp Y     &kp U           &kp I      &kp O    &kp P
 &scroll_lt SCROLL A  &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &kp L     &scroll_lt SCROLL MINUS
 &kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &scroll_lt ARROW SLASH
-&kp LALT  &kp LCTRL  &kp LSFT  &lt NUM SPACE  &kp LCMD  &lt AERO BACKSPACE  &lt SYM ENTER  &kp LCTRL  &kp DELETE  &ss_ht LG(LS(N5)) LG(LS(N4))
+&kp LALT  &kp LCTRL  &kp LSFT  &lt NUM SPACE  &kp LCMD  &mt RCMD LANG1  &lt SYM ENTER  &kp LCTRL  &lt AERO BACKSPACE  &ss_ht LG(LS(N5)) LG(LS(N4))
             >;
         };
 
-        // Layer 1: Windows (MACと同じ役割分担 / Cmd相当=LGUI、IMEはコンボ)
+        // Layer 1: Windows (MACと同じ役割分担 / Cmd相当=LGUI、IMEは変換キー)
         win_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T                           &kp Y     &kp U           &kp I      &kp O    &kp P
 &scroll_lt SCROLL A  &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &kp L     &scroll_lt SCROLL MINUS
 &kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &scroll_lt ARROW SLASH
-&kp LALT  &kp LCTRL  &kp LSFT  &lt NUM SPACE  &kp LGUI  &kp BACKSPACE  &lt SYM ENTER  &kp LCTRL  &kp DELETE  &kp LG(LS(S))
+&kp LALT  &kp LCTRL  &kp LSFT  &lt NUM SPACE  &kp LGUI  &mt LGUI INT_HENKAN  &lt SYM ENTER  &kp LCTRL  &kp BACKSPACE  &kp LG(LS(S))
             >;
         };
 
