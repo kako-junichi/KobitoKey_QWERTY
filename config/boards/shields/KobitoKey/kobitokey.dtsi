@@ -10,12 +10,11 @@
         wakeup-source;
 
         /*
-         * KobitoKey はデフォルト 5ms だと全体でチャタリングしやすい。
-         * roBa では起きないが、両手 TB + SPI の本機ではバウンスを拾いやすいので
-         * press/release とも 20ms に上げる。
+         * デフォルト 5ms だとチャタしやすい。20/20 は打鍵が重い。
+         * 押し込みだけ 10ms、離しは 5ms（コンボ 50ms や連続打鍵を殺さない）。
          */
-        debounce-press-ms = <20>;
-        debounce-release-ms = <20>;
+        debounce-press-ms = <10>;
+        debounce-release-ms = <5>;
 
         /* Dピンは &xiao_d <番号> で指定（XIAOフォーマット） */
         row-gpios = <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>, /* 例: D0 */
