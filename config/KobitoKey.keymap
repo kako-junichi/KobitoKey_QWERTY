@@ -179,11 +179,11 @@
         };
 
         // Layer 2: NUM (SPACE 長押し)
-        // 左手=電卓 / JKLの仮想デスクトップ切替を同じ列の上段 U/I/O へ / 空きに矢印（H=↑ N=← M=↓ ,=→）
+        // 左手=電卓 / Y=BSPC / UIO=JKLから上げた仮想デスクトップ切替 / 空きに矢印（H=↑ N=← M=↓ ,=→）
         num_layer {
             label = "NUMBER";
             bindings = <
-&kp MINUS                &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp PLUS     &kp LC(N1)  &kp LC(LEFT)  &kp LC(UP)  &kp LC(RIGHT)  &kp LC(N5)
+&kp MINUS                &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp PLUS     &kp BACKSPACE  &kp LC(LEFT)  &kp LC(UP)  &kp LC(RIGHT)  &kp LC(N5)
 &kp SLASH                &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_NUMBER_0  &kp UP  &trans  &trans  &trans  &trans
 &mt LEFT_SHIFT ASTERISK  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PERIOD   &kp LEFT  &kp DOWN  &kp RIGHT  &trans         &trans
 &trans                   &trans           &trans           &trans           &trans       &trans      &trans        &trans      &trans         &trans
