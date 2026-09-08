@@ -13,7 +13,7 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 | 0     | MAC    | デフォルト                                   |
 | 1     | WIN    | BT レイヤーで切替                              |
 | 2     | NUM    | 左親指 SPACE 長押し                           |
-| 3     | ARROW  | `/` 長押し                                  |
+| 3     | ARROW  | `/` 長押し、または G+H で固定                      |
 | 4     | MOUSE  | どちらかのボールを動かすと自動進入（5秒滞留、roba と同じ）        |
 | 5     | SCROLL | A もしくは `-` 長押し                          |
 | 6     | BT     | 左親指 Ctrl + Shift コンボ                    |
@@ -37,7 +37,7 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 └─────┴─────┴─────┴─────┴─────┘  └─────┴─────┴─────┴─────┴─────┘
 ```
 
-- **A** および `-` 長押しで SCROLL、**`/`** 長押しで ARROW（どれも tap-preferred）
+- **A** および `-` 長押しで SCROLL。**`/`** 長押しで ARROW（balanced。離すと戻る）。**G+H** で ARROW 固定（もう一度 G+H か `/` で解除）
 - `;` `'` は内列が無いので SYM へ。`=` は combo `C+V`、`"` は combo `L+-`
 - IME は右最内 Cmd の tap=かな。英数は combo D+F（J+K でもかな）。左手 Cmd はプレーン
 
@@ -60,7 +60,7 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 | 39  | ss_ht     | tap=Cmd+Shift+4 / hold=Cmd+Shift+5（外側）           |
 
 
-左手 Cmd はプレーン。右最内は Cmd tap=かな。右は内側から Cmd / Enter / Ctrl / BSPC。Delete キーは無し（BSPC を使う）。ARROW は `/` 長押し。Tab は combo `A+S`。
+左手 Cmd はプレーン。右最内は Cmd tap=かな。右は内側から Cmd / Enter / Ctrl / BSPC。ARROW は `/` 長押し、または G+H で固定。Tab は combo `A+S`。
 
 ## NUMレイヤー（SPACE 長押し）
 
@@ -80,7 +80,7 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 
 
 
-## ARROWレイヤー（`/` 長押し）
+## ARROWレイヤー（`/` 長押し、または G+H で固定）
 
 ```
 ┌─────┬─────┬─────┬─────┬─────┐  ┌─────┬─────┬─────┬─────┬─────┐
@@ -94,7 +94,7 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 
 - 左手 `E/S/D/F` = 逆T字の矢印、右手 `H/J/K/L` = vim 風
 - 前タブ = Ctrl+Shift+Tab、次タブ = Ctrl+Tab
-- 長押し中だけ入る（離すと戻る）。Delete 親指とは分離した
+- 長押し中だけ入る（離すと戻る）。G+H で固定したときは `/` またはもう一度 G+H で解除
 
 
 
@@ -219,6 +219,7 @@ AeroSpace 設定本体は `~/.config/aerospace/aerospace.toml`。このレイヤ
 | I + O        | Ctrl+Tab       | 次のタブ                   |
 | M + `,`      | Cmd+[          | ブラウザ戻る                 |
 | `,` + `.`    | Cmd+]          | ブラウザ進む                 |
+| G + H        | ARROW 固定         | 矢印レイヤーのトグル            |
 | Ctrl + Shift | BT レイヤー        | Bluetooth / Mac・Win 切替 |
 
 

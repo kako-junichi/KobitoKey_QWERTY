@@ -10,10 +10,9 @@
         wakeup-source;
 
         /*
-         * 5ms はチャタ、20ms は重い、10/5 は二度打ちが戻った。
-         * 押し 15ms / 離し 8ms で中間を取る。
+         * 押し 20ms で RTYU などの二度打ちを抑える。離しは 8ms のまま（20/20 の重さを避ける）。
          */
-        debounce-press-ms = <15>;
+        debounce-press-ms = <20>;
         debounce-release-ms = <8>;
 
         /* Dピンは &xiao_d <番号> で指定（XIAOフォーマット） */
