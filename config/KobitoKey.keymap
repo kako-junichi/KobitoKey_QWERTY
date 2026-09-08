@@ -158,12 +158,12 @@
         // 左: Alt Ctrl Shift Space/NUM Cmd（左手Cmdはプレーン）
         // 右内側から: Cmd tapかな / Enter/SYM / Ctrl / BSPC/AERO / SS
         // Tab は combo A+S。IME は右Cmd tap=かな、combo D+F=英数 / J+K=かな
-        // A と - は SCROLL（tap-preferred）。/ は ARROW（暫定・balanced）
+        // A と - は SCROLL（tap-preferred）
         mac_layer {
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T               &kp Y     &kp U           &kp I      &kp O    &kp P
 &scroll_lt SCROLL A  &kp S     &kp D      &kp F          &kp G               &kp H     &kp J           &kp K      &kp L     &scroll_lt SCROLL MINUS
-&kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &lt ARROW SLASH
+&kp Z     &kp X     &kp C      &kp V          &kp B               &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
 &kp LALT  &kp LCTRL  &kp LSFT  &lt NUM SPACE  &kp LCMD  &mt RCMD LANG1  &lt SYM ENTER  &kp LCTRL  &lt AERO BACKSPACE  &ss_ht LG(LS(N5)) LG(LS(N4))
             >;
         };
@@ -173,24 +173,24 @@
             bindings = <
 &kp Q     &kp W     &kp E      &kp R          &kp T                           &kp Y     &kp U           &kp I      &kp O    &kp P
 &scroll_lt SCROLL A  &kp S     &kp D      &kp F          &kp G                           &kp H     &kp J           &kp K      &kp L     &scroll_lt SCROLL MINUS
-&kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &lt ARROW SLASH
+&kp Z     &kp X     &kp C      &kp V          &kp B                           &kp N     &kp M           &kp COMMA  &kp DOT  &kp SLASH
 &kp LALT  &kp LCTRL  &kp LSFT  &lt NUM SPACE  &kp LGUI  &mt LGUI INT_HENKAN  &lt SYM ENTER  &kp LCTRL  &kp BACKSPACE  &kp LG(LS(S))
             >;
         };
 
         // Layer 2: NUM (SPACE 長押し)
-        // 左手=電卓 / 右手=macOS Spaces (Ctrl+1-5, J/L=左右スペース, K=Mission Control)
+        // 左手=電卓 / 右手上段=Spaces / ホーム HJKL=矢印
         num_layer {
             label = "NUMBER";
             bindings = <
-&kp MINUS                &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp PLUS     &kp LC(N1)  &kp LC(N2)    &kp LC(N3)  &kp LC(N4)     &kp LC(N5)
-&kp SLASH                &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_NUMBER_0  &trans      &kp LC(LEFT)  &kp LC(UP)  &kp LC(RIGHT)  &trans
-&mt LEFT_SHIFT ASTERISK  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PERIOD   &trans      &trans        &trans      &trans         &trans
+&kp MINUS                &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp PLUS     &kp LC(N1)  &kp LC(N2)  &kp LC(LEFT)  &kp LC(UP)  &kp LC(RIGHT)
+&kp SLASH                &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_NUMBER_0  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &trans
+&mt LEFT_SHIFT ASTERISK  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PERIOD   &trans  &trans  &trans  &trans         &trans
 &trans                   &trans           &trans           &trans           &trans       &trans      &trans        &trans      &trans         &trans
             >;
         };
 
-        // Layer 3: ARROW（暫定: / 長押し。配置は未確定）
+        // Layer 3: ARROW（常用は NUM の HJKL。このレイヤーは予備）
         // 左手 E/S/D/F = 逆T字、右手 H/J/K/L = vim 風
         arrow_layer {
             label = "ARROW";
@@ -205,7 +205,7 @@
         // Layer 4: MOUSE (ボール動作で自動進入、5秒滞留 / roba と同じ)
         // 左手 S/D/F = MB1/MB3/MB2、右手 J/K/L = MB1/MB3/MB2
         // N = 戻る / . = 進む / P = 次ディスプレイ
-        // A と - は SCROLL、/ は ARROW（MOUSE 滞留中も効かせる）
+        // A と - は SCROLL（MOUSE 滞留中も効かせる）
         mouse_layer {
             label = "MOUSE";
             bindings = <
