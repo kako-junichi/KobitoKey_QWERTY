@@ -179,18 +179,18 @@
         };
 
         // Layer 2: NUM (SPACE 長押し)
-        // 左手=電卓 / Y=BSPC / UIO=JKLから上げた仮想デスクトップ切替 / 空きに矢印（H=↑ N=← M=↓ ,=→）
+        // 左手=電卓 / Y=BSPC / UIO=仮想デスクトップ / HJKL=robaと同じ vim 矢印
         num_layer {
             label = "NUMBER";
             bindings = <
 &kp MINUS                &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp PLUS     &kp BACKSPACE  &kp LC(LEFT)  &kp LC(UP)  &kp LC(RIGHT)  &kp LC(N5)
-&kp SLASH                &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_NUMBER_0  &kp UP  &trans  &trans  &trans  &trans
-&mt LEFT_SHIFT ASTERISK  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PERIOD   &kp LEFT  &kp DOWN  &kp RIGHT  &trans         &trans
+&kp SLASH                &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_NUMBER_0  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &trans
+&mt LEFT_SHIFT ASTERISK  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PERIOD   &trans  &trans  &trans  &trans         &trans
 &trans                   &trans           &trans           &trans           &trans       &trans      &trans        &trans      &trans         &trans
             >;
         };
 
-        // Layer 3: ARROW（未使用寄り。矢印は NUM の右手空きを使う）
+        // Layer 3: ARROW（roba と同じキー。常用は NUM の HJKL）
         // 左手 E/S/D/F = 逆T字、右手 H/J/K/L = vim 風
         arrow_layer {
             label = "ARROW";

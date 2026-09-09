@@ -13,7 +13,7 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 | 0     | MAC    | デフォルト                                   |
 | 1     | WIN    | BT レイヤーで切替                              |
 | 2     | NUM    | 左親指 SPACE 長押し                           |
-| 3     | ARROW  | 未使用（矢印は NUM 右手の空きキー）                  |
+| 3     | ARROW  | 予備（矢印は NUM の HJKL。配置は roba と同じ）      |
 | 4     | MOUSE  | どちらかのボールを動かすと自動進入（5秒滞留、roba と同じ）        |
 | 5     | SCROLL | A もしくは `-` 長押し                          |
 | 6     | BT     | 左親指 Ctrl + Shift コンボ                    |
@@ -37,7 +37,7 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 └─────┴─────┴─────┴─────┴─────┘  └─────┴─────┴─────┴─────┴─────┘
 ```
 
-- **A** および `-` 長押しで SCROLL。矢印は SPACE 長押し（NUM）の右手空き
+- **A** および `-` 長押しで SCROLL。矢印は SPACE 長押し（NUM）の右手 HJKL（roba と同じ vim）
 - `;` `'` は内列が無いので SYM へ。`=` は combo `C+V`、`"` は combo `L+-`
 - IME は右最内 Cmd の tap=かな。英数は combo D+F（J+K でもかな）。左手 Cmd はプレーン
 
@@ -60,7 +60,7 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 | 39  | ss_ht     | tap=Cmd+Shift+4 / hold=Cmd+Shift+5（外側）           |
 
 
-左手 Cmd はプレーン。右最内は Cmd tap=かな。右は内側から Cmd / Enter / Ctrl / BSPC。矢印は NUM の右手。Tab は combo `A+S`。
+左手 Cmd はプレーン。右最内は Cmd tap=かな。右は内側から Cmd / Enter / Ctrl / BSPC。矢印は NUM の HJKL（roba と同じ）。Tab は combo `A+S`。
 
 ## NUMレイヤー（SPACE 長押し）
 
@@ -68,20 +68,20 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 ┌─────┬─────┬─────┬─────┬─────┐  ┌─────┬─────┬─────┬─────┬─────┐
 │  -  │  1  │  2  │  3  │  +  │  │ BSP │Ctl+←│Ctl+↑│Ctl+→│Ctl+5│
 ├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
-│  /  │  4  │  5  │  6  │  0  │  │  ↑  │  -  │  -  │  -  │  -  │
+│  /  │  4  │  5  │  6  │  0  │  │  ←  │  ↓  │  ↑  │  →  │  -  │
 ├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
-│*(⇧) │  7  │  8  │  9  │  .  │  │  ←  │  ↓  │  →  │  -  │  -  │
+│*(⇧) │  7  │  8  │  9  │  .  │  │  -  │  -  │  -  │  -  │  -  │
 └─────┴─────┴─────┴─────┴─────┘  └─────┴─────┴─────┴─────┴─────┘
 ```
 
 - 左手 = 電卓配列（キーパッド数字）
 - 右手上段 U/I/O = 中段 J/K/L と同じ列のまま上げた仮想デスクトップ切替（左 / Mission Control / 右）。Y = Backspace、P は Ctrl+5
-- 右手の空き: `H`=↑ / `N`=← / `M`=↓ / `,`=→（Space 長押しのまま矢印）
+- 右手ホーム HJKL = 矢印（roba と同じ vim: ← ↓ ↑ →）
 - 記号は SYM（ENTER 長押し）へ分離
 
 
 
-## ARROWレイヤー（レイヤー3は残してあるが、常用は NUM 右手）
+## ARROWレイヤー（予備。常用は NUM の HJKL）
 
 ```
 ┌─────┬─────┬─────┬─────┬─────┐  ┌─────┬─────┬─────┬─────┬─────┐
@@ -95,7 +95,7 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 
 - 左手 `E/S/D/F` = 逆T字の矢印、右手 `H/J/K/L` = vim 風
 - 前タブ = Ctrl+Shift+Tab、次タブ = Ctrl+Tab
-- 常用の矢印は NUM（SPACE 長押し）の右手空き。このレイヤー自体は今は使わない
+- 常用の矢印は NUM（SPACE 長押し）の HJKL。配置は roba の右手と同じ。このレイヤー自体は今は使わない
 
 
 
