@@ -33,13 +33,13 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 │  Z  │  X  │  C  │  V  │  B  │  │  N  │  M  │  ,  │  .  │  /  │
 ├─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┤
 │LALT │LCTRL│LSFT │ SPC │ CMD │  │ CMD │ ENT │CTRL │BSPC │ ss  │
-│     │     │     │/NUM │     │  │/かな│/SYM │     │/AERO│     │
+│     │     │     │/NUM │/英数│  │/かな│/SYM │     │/AERO│     │
 └─────┴─────┴─────┴─────┴─────┘  └─────┴─────┴─────┴─────┴─────┘
 ```
 
 - **A** および `-` 長押しで SCROLL。矢印は SPACE 長押し（NUM）の右手 HJKL（roba と同じ vim）
 - `;` `'` は内列が無いので SYM へ。`=` は combo `C+V`、`"` は combo `L+-`
-- IME は右最内 Cmd の tap=かな。英数は combo D+F（J+K でもかな）。左手 Cmd はプレーン
+- IME は左 Cmd tap=英数、右 Cmd tap=かな。combo D+F=英数 / J+K=かな も可
 
 
 
@@ -52,7 +52,7 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 | 31  | LCTRL     | Ctrl（外側寄り。Shift と両方使うので端には置かない）             |
 | 32  | LSFT      | Shift（内側。Space の左）                                  |
 | 33  | SPACE/NUM | tap=SPACE / hold=NUM（内側）                         |
-| 34  | LCMD      | Cmd（左手のみ。プレーン）                                  |
+| 34  | LCMD/英数  | tap=英数 / hold=Cmd（左手・最内）                          |
 | 35  | RCMD/かな   | tap=かな / hold=Cmd（右・最内）                          |
 | 36  | ENTER/SYM | tap=Enter / hold=SYM                                   |
 | 37  | LCTRL     | Ctrl（右手）                                            |
@@ -60,7 +60,7 @@ ZMK ベース。操作モデルは [zmk-config-roBa](https://github.com/kako-jun
 | 39  | ss_ht     | tap=Cmd+Shift+4 / hold=Cmd+Shift+5（外側）           |
 
 
-左手 Cmd はプレーン。右最内は Cmd tap=かな。右は内側から Cmd / Enter / Ctrl / BSPC。矢印は NUM の HJKL（roba と同じ）。Tab は combo `A+S`。
+左 Cmd tap=英数、右 Cmd tap=かな。右は内側から Cmd / Enter / Ctrl / BSPC。矢印は NUM の HJKL（roba と同じ）。Tab は combo `A+S`。
 
 ## NUMレイヤー（SPACE 長押し）
 
